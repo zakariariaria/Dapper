@@ -5,17 +5,17 @@ import '../styles/Mobile.css'
 
 function Mobile(){
     return(
-    <div class="mobile_container">
-    <div class="mobile">
+    <div className="mobile_container">
+    <div className="mobile">
             <div>
                 <img src={phone} alt="phone" id="phone"></img>
             </div>
-            <div class="block">
+            <div className="block">
                 <h2>Elegance at your fingertips</h2>
                 <label>Choose your outfits, and manage your plan in our app</label>
-                <div class="mobile_buttons">
-                    <a href="/" ><img src={appstore} alt="appstore" class="mobile_logo"></img></a>
-                    <a href="/" ><img src={android} alt="android" class="mobile_logo"></img></a>
+                <div className="mobile_buttons">
+                    <a href="/" ><img src={appstore} alt="appstore" className="mobile_logo"></img></a>
+                    <a href="/" ><img src={android} alt="android" className="mobile_logo"></img></a>
                 </div>
             </div>
     </div>
