@@ -132,6 +132,30 @@ body,html,div{
     height:40%;
 }
 
+#cc_row{
+    display: flex;
+    flex-direction: row;
+    width: 90%;
+    margin-left: 4%;
+    gap: 20%;
+}
+
+#expiry{
+    width: 20%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.281);
+    height:40%;
+}
+
+#cc_number{
+    width: 140%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.281);
+    height:40%;
+}
+
 #paypal,#google_pay{
     width: 80%;
     height: 50%;

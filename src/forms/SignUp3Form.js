@@ -67,14 +67,14 @@ const SignUp3Form = props => {
                 </div>
             </div>
             <label className="info">Credit Card Information</label>
-            <div className="rows">
+            <div id="cc_row">
                 <div className="label_input">
                     <label className="label_text">Credit Card Number</label>
-                    <input type="text" className="user_input"></input>
+                    <input type="text" id="cc_number"></input>
                 </div>
                 <div className="label_input">
                     <label className="label_text">Expiry Date (MM/YY)</label>
-                    <input type="text" className="user_input"></input>
+                    <input type="text" id="expiry"></input>
                 </div>
             </div>
             <div className="cvv">
