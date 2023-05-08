@@ -1,12 +1,12 @@
 
 import './App.css';
 
-import SignUp3Form from './forms/SignUp3Form';
+import About from './forms/About';
 
 function App() {
   return (
     <div>
-      <SignUp3Form></SignUp3Form>
+      <About></About>
     </div>
   );
 }

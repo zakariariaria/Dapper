@@ -31,7 +31,7 @@ div{
 .signup2_container{
     background-color: white;
     width: 40%;
-    height: 50%;
+    height: 70%;
     border-radius: 1em;
     box-shadow: 0 0.188em 1.550em rgb(156,156,156);
     display: flex;
@@ -39,6 +39,9 @@ div{
     flex-direction: column;
     justify-content: space-between;
     gap:2.5%;
+    padding-top: 1%;
+    margin-left: 32%;
+    margin-top:5%;
 }
 
 .dropdowns{
@@ -50,20 +53,34 @@ div{
 .information_rows{
     display: flex;
     flex-direction: column;
-    width:40%;
+    width:100%;
+    height: 100%;
     border-radius: 5px;
     border-width: 1px;
     border-color: rgba(128, 128, 128, 0.281);
+    margin-left: 2.5%;
+}
+
+#phone_row{
+    display: flex;
+    flex-direction: column;
+    width:100%;
+    height: 100%;
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.281);
+    margin-left: 5%;
 }
 
 .rows{
     display: flex;
     flex-direction: row;
-    width:50%;
-    gap:10%;
+    width:100%;
+    height: 100%;
     border-radius: 5px;
     border-width: 1px;
     border-color: rgba(128, 128, 128, 0.281);
+    
 }
 
 #continue_button{
@@ -72,9 +89,45 @@ div{
   border-width:thin;
   border-radius: 4px;
   color: #ffff;
-  width: 30%;
-  height: 10%;
+  width: 90%;
+  height: 50%;
   font-size: 120%;
   margin-bottom: 2.5%;
 }
 
+#phone{
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.281);
+    height: 50%;
+    width: 45%;
+    
+}
+
+.user_input{
+    border-radius: 5px;
+    border-width: 1px;
+    border-color: rgba(128, 128, 128, 0.281);
+    height:50%;
+    width: 90%;
+}
+
+.label_input{
+    font-weight: 500;
+    margin-bottom: 1%;
+}
+
+.dropdown_containers{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-left: 5%;
+}
+
+.dropdowns{
+    width:90%;
+    height: 90%;
+    margin-left: 2%;
+    background-color: white;
+    font-size:100%;
+}

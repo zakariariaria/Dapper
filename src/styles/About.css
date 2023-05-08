@@ -1,0 +1,29 @@
+body,html,div{
+    height: 100%;
+}
+
+.about{
+    height: 100%;
+    gap: 10%;
+}
+
+.title{
+    display: flex;
+    flex-direction: column;
+}
+
+.about_container{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+}
+
+.muskeeters{
+    display: flex;
+    flex-direction: column;
+}
+
+#ryad,#benak,#zak{
+    width: 40%;
+    height: 40%;
+}
