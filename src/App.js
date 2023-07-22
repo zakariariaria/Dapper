@@ -1,13 +1,20 @@
 import {Route, Routes} from "react-router-dom";
 import Login from "./Forms/Login";
 import Test from "./Forms/Test";
+import {useNavigate} from 'react-router-dom';
+
+
+
 
 function App() {
+
+  
+
   return (
     <div className="App">
       <Routes>
         <Route path="/login" element={<Login />} />
-        <Route path="/test" element={<Test />} />
+        <Route path="/" element={<Test />} />
       </Routes>
     </div>
   );
