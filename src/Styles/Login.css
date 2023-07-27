@@ -1,19 +1,46 @@
 
+html,body,#root,.App{
+    height:100%;
+}
 
-#container{
+#body{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    
+}
+
+#wrapper{
     display: flex;
     flex-direction: row;
-    border: 10px solid rgba(255,255,255,.5);
-    border-style: outset;
+    height: 80vh;
+    width: 80%;
+    border: dashed;
+    justify-content: center;
+    align-items: center;
+    
 }
 
-#right_container{
+#right_wrapper{
+    background-image: url('../Images/background.jpg');
+    background-size:cover;
+    height: 100%;
+    width: 65%;
+    justify-content: center;
+    align-items: center; 
+}
+
+#left_wrapper{
     display: flex;
     flex-direction: column;
-    background-color: black;
+    height: 100%;
+    width: 35%;
+    justify-content: center;
+    align-items: center;  
 }
 
-#social_media_container{
+#social_media_wrapper{
     display: flex;
     flex-direction: row;
 }
