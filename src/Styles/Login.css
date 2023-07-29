@@ -1,46 +1,107 @@
-
-html,body,#root,.App{
-    height:100%;
-}
-
-#body{
+#root{
+    width:100%;
+    height: 100%;
     display: flex;
     justify-content: center;
     align-items: center;
-    
-    
+}
+
+.App,html,body{
+    height:100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center; 
+}
+
+#logo{
+    margin-top: 1%;
+    margin-left: 2%;
 }
 
 #wrapper{
+    height: 100%;
+    width: 100%;
     display: flex;
     flex-direction: row;
-    height: 80vh;
-    width: 80%;
-    border: dashed;
-    justify-content: center;
-    align-items: center;
-    
-}
-
-#right_wrapper{
-    background-image: url('../Images/background.jpg');
-    background-size:cover;
-    height: 100%;
-    width: 65%;
-    justify-content: center;
-    align-items: center; 
 }
 
 #left_wrapper{
     display: flex;
     flex-direction: column;
+    width: 60%;
     height: 100%;
-    width: 35%;
-    justify-content: center;
-    align-items: center;  
 }
 
-#social_media_wrapper{
-    display: flex;
-    flex-direction: row;
+#right_wrapper{
+    width: 40%;
+    background-image: url('../Images/background.jpg');
+    background-size: cover;
 }
+
+#info_wrapper{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 60%;
+    margin-top: 10%;
+}
+
+.input_wrappers{
+    display:flex;
+    flex-direction: column;
+    height: 100%;
+    width: 35%;
+}
+
+#buttons_wrapper,#account_wrapper{
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 50%;
+    height: 50%;
+    gap:5%;
+    
+}
+
+#login_button,#signup_button{
+    width: 40%;
+    height: 80%;
+}
+
+#login_button{
+    background-color: rgb(41, 177, 204);
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 4px 3px 10px rgb(0 0 0 / 0.2);
+}
+
+#signup_button{
+    color: rgb(41, 177, 204);
+    background-color: white;
+    outline: 2px;
+    border-radius: 50px;
+    border-color: rgb(41, 177, 204);
+}
+
+.text_inputs{
+    border-radius: 40px;
+    outline:none;
+    border: none;
+    box-shadow: 4px 3px 10px rgb(0 0 0 / 0.2);
+    height: 30%;
+}
+
+#subtitle{
+    font-size: 70%;
+    color: rgb(139, 139, 139);
+    width: 60%;
+}
+
+#title{
+    color: rgb(71, 71, 71);
+    width: 60%;
+}
+    
