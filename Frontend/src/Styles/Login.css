@@ -17,6 +17,7 @@
 #logo{
     margin-top: 1%;
     margin-left: 2%;
+    color: red;
 }
 
 #wrapper{
@@ -26,14 +27,14 @@
     flex-direction: row;
 }
 
-#left_wrapper{
+#right_wrapper{
     display: flex;
     flex-direction: column;
     width: 60%;
     height: 100%;
 }
 
-#right_wrapper{
+#left_wrapper{
     width: 40%;
     background-image: url('../Images/background.jpg');
     background-size: cover;
@@ -43,8 +44,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 60%;
-    margin-top: 10%;
+    height: 100%;
+    width: 100%;
 }
 
 .input_wrappers{
@@ -60,7 +61,6 @@
     flex-direction: row;
     width: 50%;
     height: 50%;
-    gap:5%;
     
 }
 
@@ -104,4 +104,3 @@
     color: rgb(71, 71, 71);
     width: 60%;
 }
-    
