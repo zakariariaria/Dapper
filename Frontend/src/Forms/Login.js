@@ -1,7 +1,10 @@
 import React from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../Styles/Login.css'
-import { BsArrowRight } from 'react-icons/bs';
+import logo from '../Images/logo.png'
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
+</style> 
 
 function Login() {
 
@@ -15,41 +18,37 @@ function Login() {
     
     return (
         <body>
-            <div id="wrapper">
-                <div id="left_wrapper">
+            <div id="wrapper_login">
+                <div id="left_wrapper_login">
 
-                    <div id="logo">
-                        <label>Dapper</label>
+                    <div id="logo_login">
+                        <a href="/"><img src={logo}></img></a>
                     </div>
                 
                 </div>
-                <div id="right_wrapper">
+                <div id="right_wrapper_login">
 
                     
 
-                    <div id="info_wrapper">
+                    <div id="info_wrapper_login">
                         <label id="subtitle">START YOUR UNIQUE CLOTHING EXPERIENCE</label>
-                        <h1 id="title">Login to your account</h1>
-                        <div className="input_wrappers">
-                            <label>E-Mail</label>
+                        <h1 id="title">Login to Dapper</h1>
+                        <div className="input_wrappers_login" id="email_wrapper_login">
+                            <label id="email_label">E-Mail</label>
                             <input type="text" className="text_inputs"></input>
                         </div>
-                        <div className="input_wrappers">
-                            <label>Password</label>
+                        <div className="input_wrappers_login">
+                            <div id="password_label">
+                                <label>Password</label>
+                                <a href="/">Forgot?</a>
+                            </div>
                             <input type="password"  className="text_inputs"></input>
                         </div>
                         
-                        <div id="buttons_wrapper">
-                            <button id="signup_button" onClick={handleClick}>Register</button>
-                            <button id="login_button">Login</button>
-                        </div>
-                        <div id="account_wrapper">
-                            <div id="checkbox_wrapper">
-                                <input type="checkbox"></input>
-                                <label>Remember me</label>
-                            </div>
-                            <a href="#">Forgot password?</a>
-                        </div>
+                        
+                        <button id="login_button">Login</button>
+                        
+                        <label id="register_button">Don't have an account? <a href="/register">Sign up</a></label>
                     </div>      
                 </div>
                 
