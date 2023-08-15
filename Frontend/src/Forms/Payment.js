@@ -14,12 +14,12 @@ function Payment() {
             </div>
             <div className="or">
                 <hr className="line"/>
-                <p>or</p>
+                <p id="or">or</p>
                 <hr className="line"/>
             </div>
             <div className="label2">
                 <label id="pay">Pay with Credit Card</label>
-                <div>
+                <div id="checkbox_wrapper_payment">
                     <input type="checkbox" id="checkbox"></input>
                     <label>Use shipping address</label>
                 </div>
@@ -69,16 +69,16 @@ function Payment() {
             <div id="cc_row">
                 <div className="label_input">
                     <label className="label_text">Credit Card Number</label>
-                    <input type="text" id="cc_number"></input>
+                    <input type="text" id="cc_number" className="user_input"></input>
                 </div>
                 <div className="label_input">
                     <label className="label_text">Expiry Date (MM/YY)</label>
-                    <input type="text" id="expiry"></input>
+                    <input type="text" id="expiry" className="user_input"></input>
                 </div>
             </div>
             <div className="cvv">
-                    <label className="label_text">CVV</label>
-                    <input type="text" className="cvv_input"></input>
+                    <label id="cvv_label">CVV</label>
+                    <input type="text" className="user_input"></input>
             </div>
             <button id="continue_button" type="submit">Continue</button>
         </div>

@@ -120,3 +120,7 @@ html,body,#root,.App{
 #login_router_signup{
     margin-left: 9.5%;
 }
+
+#checkbox_wrapper{
+    margin-left: 3%;
+}
