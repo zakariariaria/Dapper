@@ -23,9 +23,6 @@ function AccountSettings() {
                         <div className="tabHead" onClick={()=>{setIndex(1)}}>
                             <label className="tab_label">Billing</label>
                         </div>
-                        <div className="tabHead" onClick={()=>{setIndex(2)}}>
-                            <label className="tab_label">Notification Settings</label>
-                        </div>
                     </div>
                 </div>
 
