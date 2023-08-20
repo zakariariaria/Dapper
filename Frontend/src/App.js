@@ -6,6 +6,7 @@ import Payment from "./Forms/Payment";
 import Signup from "./Forms/Signup";
 import PlanSelection from "./Forms/PlanSelection";
 import Address from "./Forms/Address";
+import Checkout from "./Forms/Checkout";
 import {useNavigate} from 'react-router-dom';
 
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/account-settings" element={<AccountSettings/>}/>
         <Route path="/plan-selection" element={<PlanSelection/>}/>
         <Route path="/address" element={<Address/>}/>
+        <Route path="/checkout" element={<Checkout/>}/>
       </Routes>
     </div>
   );

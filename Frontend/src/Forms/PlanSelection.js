@@ -23,7 +23,7 @@ function PlanSelection() {
                     <ul id="list_plan">
                         <a href="/plan-selection">Select Plan</a>
                         <a href="/address">Address</a>
-                        <a href="/about">Checkout</a>
+                        <a href="/checkout">Checkout</a>
                         <a href="/about">Select Clothes</a>
                     </ul>
                 </div>
