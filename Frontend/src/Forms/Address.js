@@ -7,7 +7,7 @@ function Address() {
     const navigate = useNavigate();
 
     function handleClick(){
-        navigate("/login")
+        navigate("/checkout")
     }
 
     const[index,setIndex] = useState(0);
@@ -20,8 +20,8 @@ function Address() {
                     <ul id="list_address">
                         <a href="/plan-selection">Select Plan</a>
                         <a href="/address">Address</a>
-                        <a href="/about">Checkout</a>
-                        <a href="/about">Select Clothes</a>
+                        <a href="/checkout">Checkout</a>
+                        <a href="/clothes-selection">Select Clothes</a>
                     </ul>
                 </div>
                 <div id="wrapperWrappers_address">
@@ -69,7 +69,7 @@ function Address() {
                                         <option value="" onClick={()=>{setIndex(1)}}>Add a billing address</option>
                                     </select>
                                     
-                            <div id="wrapperInfo_billingAddress" hidden={index !=1}>
+                            <div id="wrapperInfo_billingAddress" hidden={index !==1}>
                             <h3>Billing address</h3>
                             
                             <div className="wrapperInputRows_address">
@@ -117,7 +117,8 @@ function Address() {
                                         <option value="" onClick={()=>{setCounter(0)}}>Leave at back door</option>
                                         <option value="" onClick={()=>{setCounter(1)}}>Other</option>
                                     </select>
-                                    <input type="text" hidden={counter !=1}></input>
+                                    <input type="text" hidden={counter !==1}></input>
+                                    <button onClick={handleClick}>Continue</button>
                             </div>
                             
                             

@@ -1,0 +1,45 @@
+html,body,#root,.App{
+    height: 100%;
+}
+
+#wrapper_selectClothes{
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+
+}
+
+#wrapper_carousel_selectClothes{
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 40%;
+}
+
+#carousel_selectClothes{
+    height: 100%;
+    width: 100%;
+    background-size: cover;
+    position: relative;
+}
+
+#wrapper_dots_selectClothes{
+    display: flex;
+    flex-direction: row;
+    position: absolute;
+    bottom: 0;
+    left: 45%;
+}
+
+#dots_selectClothes{
+    cursor: pointer;
+    font-size: 40px;
+    margin: 0 3px;
+}
+
+
+
+
+
+

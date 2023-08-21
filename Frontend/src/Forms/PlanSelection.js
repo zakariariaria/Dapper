@@ -11,7 +11,7 @@ function PlanSelection() {
     const navigate = useNavigate();
 
     function handleClick(){
-        navigate("/login")
+        navigate("/address")
     }
 
     const[index,setIndex] = useState(0);
@@ -24,7 +24,7 @@ function PlanSelection() {
                         <a href="/plan-selection">Select Plan</a>
                         <a href="/address">Address</a>
                         <a href="/checkout">Checkout</a>
-                        <a href="/about">Select Clothes</a>
+                        <a href="/clothes-selection">Select Clothes</a>
                     </ul>
                 </div>
                 <h1>Choose your plan</h1>
@@ -36,21 +36,21 @@ function PlanSelection() {
                 <div id="wrapperPlans_plan">
                     <div className="choicePlans_plan">
                         <h5>Essentials</h5>
-                        <h1 hidden={index !=0}>24$ / MONTH</h1>
-                        <h1 hidden={index !=1}>276$ / YEAR</h1>
+                        <h1 hidden={index !==0}>24$ / MONTH</h1>
+                        <h1 hidden={index !==1}>276$ / YEAR</h1>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic}></img>
+                            <img src={icon_acrylic} alt="icon_acrylic"></img>
                             <label>Affordable price</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic}></img>
+                            <img src={icon_acrylic} alt="icon_acrylic"></img>
                             <label>Versatile and easy to wear</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic}></img>
+                            <img src={icon_acrylic} alt="icon_acrylic"></img>
                             <label>Quality clothes</label>
                         </div>
-                        <button className="planSelection">Choose plan</button>
+                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
                     </div>
                     <div className="choicePlans_plan">
                         <div id="wrapperElevated">
@@ -58,43 +58,43 @@ function PlanSelection() {
                             <label id="bestLabel">  BEST! </label>
                         </div>
                         
-                        <h1 hidden={index !=0}>50$ / MONTH</h1>
-                        <h1 hidden={index !=1}>576$ / YEAR</h1>
+                        <h1 hidden={index !==0}>50$ / MONTH</h1>
+                        <h1 hidden={index !==1}>576$ / YEAR</h1>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow}></img>
+                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
                             <label>Access to latest trends and styles</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow}></img>
+                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
                             <label>Stands out from the crowd</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow}></img>
+                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
                             <label>High-quality and on-trend</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow}></img>
+                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
                             <label>Curated selection of mid-range clothing and accessories</label>
                         </div>
-                        <button className="planSelection">Choose plan</button>
+                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
                     </div>
                     <div className="choicePlans_plan">
                         <h5>Deluxe</h5>
-                        <h1 hidden={index !=0}>120$ / MONTH</h1>
-                        <h1 hidden={index !=1}>1200$ / YEAR</h1>
+                        <h1 hidden={index !==0}>120$ / MONTH</h1>
+                        <h1 hidden={index !==1}>1200$ / YEAR</h1>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green}></img>
+                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
                             <label>Exclusive items</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green}></img>
+                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
                             <label>Finest quality clothing and accessories</label>
                         </div>
                         <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green}></img>
+                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
                             <label>Unmatched luxury fashion experience</label>
                         </div>
-                        <button className="planSelection">Choose plan</button>
+                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
                     </div>
                 </div>
                 
