@@ -1,6 +1,7 @@
 import '../Styles/Payment.css'
 import paypal from '../Images/Paypal.png'
 import google_pay from '../Images/GooglePay.png'
+import Footer from '../Components/Footer';
 
 function Payment() {
     return(
@@ -82,6 +83,7 @@ function Payment() {
             </div>
             <button id="continue_button" type="submit">Continue</button>
         </div>
+        <Footer></Footer>
         </body>
     );
 }

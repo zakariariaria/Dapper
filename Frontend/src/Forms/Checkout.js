@@ -7,6 +7,7 @@ import visa from '../Images/Visa.png'
 import amex from '../Images/Amex.png'
 import mastercard from '../Images/Mastercard.png'
 import PayPal_icon from '../Images/PayPal_icon.png'
+import Footer from '../Components/Footer';
 
 
 
@@ -73,7 +74,7 @@ function Checkout() {
                     <label>By clicking "Place order & Select Clothes" I accept the <a href="/">terms and conditions</a> and I have read the <a href="/">privacy policy</a></label>
                     <button onClick={handleClick}>Place Order & Select Clothes</button>
                 </div>
-                
+                <Footer></Footer>
             </div>
             
         </body>

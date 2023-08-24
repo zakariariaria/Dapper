@@ -1,23 +1,26 @@
 import React, {useState} from 'react';
-import { useNavigate } from 'react-router-dom';
-import streetwear1 from '../Images/streetwear1.webp'
-import vintage from '../Images/vintage-style_1.jpg'
-import casual from '../Images/casual-style_1.jpg'
-import '../Styles/SelectClothes.css'
+
+import streetwear1 from '../Images/streetwear1.webp';
+import vintage from '../Images/vintage-style_1.jpg';
+import casual from '../Images/casual-style_1.jpg';
+import '../Styles/SelectClothes.css';
+import Footer from '../Components/Footer';
+import Popup from '../Components/Popup';
+import men_sizes from '../Images/men-sizes.png';
+import women_sizes from '../Images/women-sizes.png';
 
 
 
 function SelectClothes() {
     
-    const navigate = useNavigate();
 
-    function handleClick(){
-        navigate("/login")
-    }
+    const [buttonPopup, setButtonPopup] = useState(false);
 
     const [index, setIndex] = useState(0);
 
     const [counter, setCounter] = useState(0);
+
+    const [gender, setGender] = useState(0);
 
     const nextSlide = () => {
         if(index !== images.length - 1 ){
@@ -39,6 +42,16 @@ function SelectClothes() {
 
     const goToSlide = dot_index => {
         setIndex(dot_index)
+    }
+
+    function maleOnClick() {
+        setCounter(0);
+        setGender(0);
+    }
+
+    function femaleOnClick() {
+        setCounter(0);
+        setGender(1);
     }
 
     
@@ -74,8 +87,8 @@ function SelectClothes() {
              <label>{images[index].description}</label>
              <label>Gender</label>
              <select id="genders">
-                <option value="" onClick={()=>{setCounter(0)}}>Male</option>
-                <option value="" onClick={()=>{setCounter(0)}}>Female</option>
+                <option value="" onClick={()=>{maleOnClick()}}>Male</option>
+                <option value="" onClick={()=>{femaleOnClick()}}>Female</option>
                 <option value="" onClick={()=>{setCounter(0)}}>Non-binary / Genderqueer</option>
                 <option value="" onClick={()=>{setCounter(0)}}>Transgender</option>
                 <option value="" onClick={()=>{setCounter(1)}}>Other</option>
@@ -95,6 +108,11 @@ function SelectClothes() {
                 <option>Earth Tones</option>
              </select>
              <label>Size</label>
+             <label onClick={() => setButtonPopup(true)} id="size-popup">See size chart here</label>
+             <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
+                <img src={men_sizes} hidden={gender !=0} className="img-sizes"></img>
+                <img src={women_sizes} hidden={gender !=1} className="img-sizes"></img>
+             </Popup>
              <select>
                 <option value="">XS</option>
                 <option value="">S</option>
@@ -105,7 +123,8 @@ function SelectClothes() {
                 <option value="">XXXL</option>
              </select>
             </div>
-            
+            <button>Continue</button>
+            <Footer></Footer>
         </body>
         
     )

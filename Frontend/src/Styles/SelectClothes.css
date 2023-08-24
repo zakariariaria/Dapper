@@ -39,7 +39,14 @@ html,body,#root,.App{
 }
 
 
+#size-popup{
+    cursor: pointer;
+    color: #0066CC;
+    text-decoration:underline;
+}
 
-
-
-
+.img-sizes{
+    height: 80%;
+    width: 80%;
+    object-fit: fill;
+}

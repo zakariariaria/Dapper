@@ -1,14 +1,13 @@
 import React,  {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../Styles/AccountSettings.css'
+import Footer from '../Components/Footer';
 
 function AccountSettings() {
     
     const navigate = useNavigate();
 
-    function handleClick(){
-        navigate("/login")
-    }
+   
 
     const[index,setIndex] = useState(0);
 
@@ -57,7 +56,7 @@ function AccountSettings() {
                 </div>
                 
             </div>
-
+            <Footer></Footer>
                 
             
         </body>

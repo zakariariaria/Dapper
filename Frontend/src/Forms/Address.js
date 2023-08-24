@@ -1,6 +1,7 @@
 import React,  {useState} from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../Styles/Address.css'
+import Footer from '../Components/Footer';
 
 function Address() {
     
@@ -144,7 +145,7 @@ function Address() {
 
                 
             
-                
+                <Footer></Footer>
             </div>
             
         </body>

@@ -2,6 +2,7 @@ import React from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../Styles/Home.css'
 import placeholder from '../Images/placeholder-image.png'
+import Footer from '../Components/Footer';
 
 
 
@@ -14,7 +15,7 @@ function Home() {
     }
 
     function navSignup(){
-        navigate("/signup")
+        navigate("/register")
     }
 
     return (
@@ -92,7 +93,7 @@ function Home() {
                         </div>
                     </div>
                 </div>
-                
+                <Footer></Footer>
             </div>
         </body>
     )

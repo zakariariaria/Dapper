@@ -2,6 +2,7 @@ import React from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../Styles/Login.css'
 import logo from '../Images/logo.png'
+import Footer from '../Components/Footer';
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display&display=swap');
 </style> 

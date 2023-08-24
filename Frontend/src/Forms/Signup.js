@@ -1,13 +1,16 @@
 import React from 'react';
+import {useNavigate} from 'react-router-dom';
 import '../Styles/Signup.css'
+
 
 
 function Signup() {
 
-    const resetInput = (e) => {
-        e.target.value = "";
-    }
+    const navigate = useNavigate();
 
+    function navPlanSelection(){
+        navigate("/plan-selection")
+    }
     
     return (
         <body>
@@ -44,7 +47,7 @@ function Signup() {
                             <input type="checkbox"></input>
                             <label>I agree with Dapper's <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a></label>
                         </div>
-                        <button id="confirm_button_signup">Create account</button>
+                        <button id="confirm_button_signup" onClick={navPlanSelection}>Create account</button>
                         <label id="login_router_signup">Already have an account? <a href="login">Sign in</a></label>
                     </div>      
                 </div>

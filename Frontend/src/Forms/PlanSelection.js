@@ -4,6 +4,7 @@ import '../Styles/PlanSelection.css'
 import icon_acrylic from '../Images/icon-acrylic.png'
 import icon_acrylic_yellow from '../Images/icon-acrylic-yellow.png'
 import icon_acrylic_green from '../Images/icon-acrylic-green.png'
+import Footer from '../Components/Footer';
 
 
 function PlanSelection() {
@@ -99,7 +100,7 @@ function PlanSelection() {
                 </div>
                 
             </div>
-            
+            <Footer></Footer>
         </body>
     )
 }
