@@ -7,7 +7,6 @@ class Footer extends React.Component {
         <footer>
         <div class="footer-content">
             <div class="footer-section">
-                <h2>Liens de navigation</h2>
                 <ul>
                     <li><a href="#">Home</a></li>
                     <li><a href="#">Products/Services</a></li>

@@ -107,14 +107,22 @@ function SelectClothes() {
                 <option>Pastel Dream</option>
                 <option>Earth Tones</option>
              </select>
-             <label>Size</label>
+             <label>Tops Size</label>
              <label onClick={() => setButtonPopup(true)} id="size-popup">See size chart here</label>
              <Popup trigger={buttonPopup} setTrigger={setButtonPopup}>
                 <img src={men_sizes} hidden={gender !=0} className="img-sizes"></img>
                 <img src={women_sizes} hidden={gender !=1} className="img-sizes"></img>
              </Popup>
              <select>
-                <option value="">XS</option>
+                <option value="">S</option>
+                <option value="">M</option>
+                <option value="">L</option>
+                <option value="">XL</option>
+                <option value="">XXL</option>
+                <option value="">XXXL</option>
+             </select>
+             <label>Bottoms Size</label>          
+             <select>
                 <option value="">S</option>
                 <option value="">M</option>
                 <option value="">L</option>
