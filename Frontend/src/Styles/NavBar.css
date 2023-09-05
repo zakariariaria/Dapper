@@ -2,14 +2,14 @@
   display: flex; /* Use Flexbox to create a row layout */
   justify-content: space-between; /* Distribute space between elements */
   align-items: center; /* Vertically align elements */
-  font-family: "Playfair Display", serif;
-  background-color: #333;
+  font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+    background-color: #DDD0C8;
   color: white;
 }
 
 a {
   text-decoration: none;
-  color: white;
+  color: #323232;
   font-size: 18px;
   white-space: nowrap;
   transition: color 0.3s ease, 
@@ -20,7 +20,8 @@ a:hover {
 }
 
 #button_list button {
-  background-color: #007bff;
+  background-color: #323232;
+  font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
   white-space: nowrap;
   color: white;
   border: none;
