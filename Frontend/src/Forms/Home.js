@@ -11,12 +11,14 @@ function Home() {
         <Navbar></Navbar>
         <div id="wrapper_home">
           <div id="wrapper_title">
-            <h1>We help you look your best</h1>
+            <h1 className="bannerTitle">We help you look your best</h1>
             <button className="plans_button_home">View our plans</button>
           </div>
         </div>
         <hr className="line_home"></hr>
+
         <div id="wrapper_work_home">
+          <div className="wrapper_how_it_works">
           <h2>How it works</h2>
           <ul id="work_list">
             <li>Choose your clothes</li>
@@ -24,24 +26,25 @@ function Home() {
           </ul>
           <div className="wrapper_images_home">
             <div className="wrapper_choices">
-              <img src={placeholder} className="placeholder"></img>
+              <img className="placeholder"></img>
               <h3>Choose your clothes</h3>
               <label>Curated outfits</label>
             </div>
             <div className="wrapper_choices">
-              <img src={placeholder} className="placeholder"></img>
+              <img  className="placeholder"></img>
               <h3>Create the perfect box</h3>
-              <label>lorem ipsum</label>
+              <label>Curated outfits</label>
             </div>
             <div className="wrapper_choices">
-              <img src={placeholder} className="placeholder"></img>
+              <img  className="placeholder"></img>
               <h3>Get convenient deliveries</h3>
               <label>
-                Scheduling made easy, with drop-offs right at your door
+              Curated outfits
               </label>
             </div>
-          </div>
+            </div>
           <button>Learn more</button>
+          </div>
           <hr className="line_home"></hr>
           <h1>Your box, your way</h1>
           <label>

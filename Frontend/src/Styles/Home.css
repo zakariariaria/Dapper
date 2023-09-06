@@ -43,16 +43,15 @@ html,body,#root,.App{
     align-items: center;
     justify-content: center; 
     width: 100%;
-    min-height: 100%; /* Set a minimum height */
+    min-height: 100%; 
     background-image: url('../Images/background_home.jpg');
     background-size: cover;
-    text-align: center; /* Center-align text within the wrapper */
+    text-align: center; 
 }
 
 #wrapper_title {
-    margin-left: 20%; /* Adjust the margin to move it a bit to the right */
+    margin-left: 20%;
 }
-/* Typewriter effect for the h1 */
 @keyframes typing {
     0% {
         width: 0;
@@ -91,15 +90,21 @@ html,body,#root,.App{
 
 @keyframes blink {
     50% {
-        border-right: 2px solid transparent; /* Create a blinking cursor effect */
+        border-right: 2px solid transparent; 
     }
 }
 
-h1 {
-    overflow: hidden; /* Hide overflow text */
-    white-space: nowrap; /* Prevent text from wrapping */
-    border-right: 2px solid #323232; /* Add a cursor line */
-    animation: typing 5s steps(10, end), blink 1s step-end infinite; /* Adjust duration and steps */
+.wrapper_how_it_works{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.bannerTitle {
+    overflow: hidden; 
+    white-space: nowrap; 
+    border-right: 2px solid #323232; 
+    animation: typing 5s steps(10, end), blink 1s step-end infinite;
 }
 
 
@@ -113,8 +118,8 @@ h1 {
     cursor: pointer;
     border-radius: 18px;
     transition: background-color 0.3s ease;
-    margin-top: 10px; /* Add margin to separate the button from the text */
-    font-size: 18px; /* Increase font size to make the text larger */
+    margin-top: 10px; 
+    font-size: 18px; 
 
 }
 
@@ -144,16 +149,47 @@ h1 {
 #work_list{
     display: flex;
     flex-direction: row;
+    gap: 2rem;
 }
 
 .wrapper_images_home{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 2rem;   
 }
+.wrapper_choices{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wrapper_choices label {
+    max-width: 200px;
+    word-wrap: break-word;
+  }
+
+
+button{
+    background-color: #323232;
+    font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+    white-space: nowrap;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  button:hover{
+    background-color: #0056b3;
+
+  }
 
 .placeholder{
-    height: 150px;
-    width: 150px;
+    height: 250px;
+    width: 250px;
 }
 
 .wrapper_choices{
