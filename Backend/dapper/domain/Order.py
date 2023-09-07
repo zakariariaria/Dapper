@@ -1,5 +1,7 @@
 import os
+from dataclasses import dataclass
 
+@dataclass
 class Order():
     @classmethod
     def alternateConstructor(cls, aOrderId, aOrderDate, aDeliveryDate, aStatus, aCustomer, aItemPackage, aBill):
