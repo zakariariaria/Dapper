@@ -1,5 +1,7 @@
 import os
+from dataclasses import dataclass
 
+@dataclass
 class Review():
     def __init__(self, aRating, aComment, aRatingId, aStylist):
         self._customers = None

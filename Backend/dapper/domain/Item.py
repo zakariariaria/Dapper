@@ -1,3 +1,6 @@
+from dataclasses import dataclass
+
+@dataclass
 class Item():
     def __init__(self, aSize, aPrice, aColorScheme, aBrand, aItemId, aImageURL):
         self._itemPackages = None

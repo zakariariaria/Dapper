@@ -1,5 +1,7 @@
 import os
+from dataclasses import dataclass
 
+@dataclass
 class Subscription():
     @classmethod
     def alternateConstructor(cls, aPrice, aType, aStartDate, aEndDate, aOutfitsPerMonth, aCustomer):

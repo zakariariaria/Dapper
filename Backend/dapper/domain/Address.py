@@ -1,5 +1,7 @@
 import os
+from dataclasses import dataclass
 
+@dataclass
 class Address():
     def __init__(self, aAddress, aPostalCode, aCity, aProvince, aCountry, aCustomer):
         self._paymentInformations = None
