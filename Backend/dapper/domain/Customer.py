@@ -1,5 +1,7 @@
 from User import User
+from dataclasses import dataclass
 
+@dataclass
 class Customer(User):
     @classmethod
     def alternateConstructor(cls, aName, aEmailAddress, aPassword, aUserId, aSubscription, aPreference):

@@ -1,5 +1,7 @@
 import os
+from dataclasses import dataclass
 
+@dataclass
 class PaymentInformation():
     def __init__(self, aCreditCardNumber, aName, aExpirationDate, aBillingAddress):
         self._customers = None

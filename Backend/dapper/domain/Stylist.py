@@ -1,5 +1,7 @@
 from User import User
+from dataclasses import dataclass
 
+@dataclass
 class Stylist(User):
     def __init__(self, aName, aEmailAddress, aPassword, aUserId, aBio, aProfilePictureURL):
         self._itemPackages = None
