@@ -1,0 +1,37 @@
+version: '3'
+
+services:
+  frontend:
+    build: ./Frontend
+    ports:
+      - "3000:3000"
+    container_name: frontend-docker
+    restart: always
+    links:
+      - backend
+  backend:
+    build: ./Backend
+    ports:
+      - "8080:8080"
+    container_name: backend-docker
+    restart: always
+    environment:
+      - MYSQL_HOST=db
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=dapper
+      - MYSQL_USER=1ctps9du2blghondeiey
+      - MYSQL_PASSWORD=pscale_pw_tqg3yFejQGKphFa4aCb4aFXPHlaqlrdHYbCCQZ7Yy1Y
+    links:
+      - db
+  db:
+    platform: linux/x86_64
+    image: mysql:5.7
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: dapper_db_password # Change this to our desired root password
+      MYSQL_DATABASE: dapper
+      MYSQL_USER: 1ctps9du2blghondeiey
+      MYSQL_PASSWORD: pscale_pw_tqg3yFejQGKphFa4aCb4aFXPHlaqlrdHYbCCQZ7Yy1Y
+    container_name: database-docker
+    restart: always
