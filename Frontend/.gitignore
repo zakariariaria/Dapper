@@ -21,3 +21,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Ignore Babel cache files
+Frontend/node_modules/.cache/babel-loader/

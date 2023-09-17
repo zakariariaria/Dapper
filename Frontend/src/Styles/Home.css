@@ -1,5 +1,8 @@
 html,body,#root,.App{
     height: 100%;
+    font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+        background-color: #DDD0C8;
+
 }
 
 #container_home{
@@ -34,13 +37,94 @@ html,body,#root,.App{
     width: 7%;
 }
 
-#wrapper_home{
+#wrapper_home {
     display: flex;
     flex-direction: column;
+    align-items: center;
+    justify-content: center; 
     width: 100%;
-    height: 60%;
+    min-height: 100%; 
     background-image: url('../Images/background_home.jpg');
-    background-size: cover;   
+    background-size: cover;
+    text-align: center; 
+}
+
+#wrapper_title {
+    margin-left: 20%;
+}
+@keyframes typing {
+    0% {
+        width: 0;
+    }
+    10% {
+        width: 10%;
+    }
+    20% {
+        width: 20%;
+    }
+    30% {
+        width: 30%;
+    }
+    40% {
+        width: 40%;
+    }
+    50% {
+        width: 50%;
+    }
+    60% {
+        width: 60%;
+    }
+    70% {
+        width: 70%;
+    }
+    80% {
+        width: 80%;
+    }
+    90% {
+        width: 90%;
+    }
+    100% {
+        width: 100%;
+    }
+}
+
+@keyframes blink {
+    50% {
+        border-right: 2px solid transparent; 
+    }
+}
+
+.wrapper_how_it_works{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 2rem;
+}
+.bannerTitle {
+    overflow: hidden; 
+    white-space: nowrap; 
+    border-right: 2px solid #323232; 
+    animation: typing 5s steps(10, end), blink 1s step-end infinite;
+}
+
+
+.plans_button_home {
+    background-color: #323232;
+    font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+    white-space: nowrap;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px; 
+    font-size: 18px; 
+
+}
+
+.plans_button_home:hover {
+    background-color: #0056b3;
 }
 
 #wrapper2_home{
@@ -52,10 +136,6 @@ html,body,#root,.App{
     background-size: cover;   
 }
 
-#wrapper_title{
-    width: 100%;
-    position: relative;
-}
 
 .line_home{
     width: 100%;
@@ -69,16 +149,47 @@ html,body,#root,.App{
 #work_list{
     display: flex;
     flex-direction: row;
+    gap: 2rem;
 }
 
 .wrapper_images_home{
     display: flex;
     flex-direction: row;
+    align-items: center;
+    gap: 2rem;   
 }
+.wrapper_choices{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.wrapper_choices label {
+    max-width: 200px;
+    word-wrap: break-word;
+  }
+
+
+button{
+    background-color: #323232;
+    font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+    white-space: nowrap;
+    color: white;
+    border: none;
+    padding: 5px 20px;
+    cursor: pointer;
+    border-radius: 18px;
+    transition: background-color 0.3s ease;
+    margin-top: 10px;
+    font-size: 18px;
+  }
+  button:hover{
+    background-color: #0056b3;
+
+  }
 
 .placeholder{
-    height: 150px;
-    width: 150px;
+    height: 250px;
+    width: 250px;
 }
 
 .wrapper_choices{
@@ -92,3 +203,20 @@ html,body,#root,.App{
     width: 100%;
     height: 100%;
 }
+.image-container {
+    border-radius: 18px;
+    overflow: hidden;
+  }
+  
+  .image-container:hover  {
+    animation: scaleAnimation 1s ease-in-out infinite alternate;
+  }
+  
+  @keyframes scaleAnimation {
+    0% {
+      transform: scale(1);
+    }
+    100% {
+      transform: scale(1.01);
+    }
+  }

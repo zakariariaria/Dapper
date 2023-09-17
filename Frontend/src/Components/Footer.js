@@ -1,36 +1,31 @@
-import React from 'react';
-import '../Styles/Footer.css'
+import React from "react";
+import "../Styles/Footer.css";
 
 class Footer extends React.Component {
-    render() {
-      return (
-        <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <ul>
-                    <li><a href="#">Home</a></li>
-                    <li><a href="#">Products/Services</a></li>
-                    <li><a href="#">About</a></li>
-                    <li><a href="#">Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h2>Contact</h2>
-                <p>Email : contact@example.com</p>
-                <p>Phone : 123-456-7890</p>
-                
-            </div>
-            
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2023 Dapper. All rights reserved.</p>
-        </div>
-        </footer>
-      )
-      
-    }
+  render() {
+    return (
+        <footer style={{
+            display: "flex",
+            flexDirection: "row",
+            gap: "5rem", 
+            padding:"5rem "
+          }}>
+            <a style={{ color: "black",textDecoration: "none"}}>2023 Dapper. All rights reserved.</a>
+            <a href="#">Home</a>
+            <a href="#">Products/Services</a>
+            <a href="#">About</a>
+            <a href="#">Contact</a>
+            <a style={{ color: "black",textDecoration: "none"}}>Email : contact@example.com</a>
+            <a style={{ color: "black",textDecoration: "none"}}>Phone : 123-456-7890</a>
+          </footer>
+         
+          
+          
+          
+          
+          
+    );
   }
-  
-  export default Footer;
+}
 
-
+export default Footer;
