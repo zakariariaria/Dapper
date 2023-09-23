@@ -1,108 +1,101 @@
-import React,  {useState} from 'react';
-import { useNavigate} from 'react-router-dom';
-import '../Styles/PlanSelection.css'
-import icon_acrylic from '../Images/icon-acrylic.png'
-import icon_acrylic_yellow from '../Images/icon-acrylic-yellow.png'
-import icon_acrylic_green from '../Images/icon-acrylic-green.png'
-import Footer from '../Components/Footer';
-
+import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+import '../Styles/PlanSelection.css';
 
 function PlanSelection() {
-    
     const navigate = useNavigate();
+    const [index, setIndex] = useState(0);
 
-    function handleClick(){
-        navigate("/address")
-    }
+    const [billing, setBilling] = useState('monthly'); // state to manage billing option
+    
+    const plans = [
+        { 
+            title: 'Essentials', 
+            monthlyPrice: '$24', 
+            yearlyPrice: '$270', 
+            features: [
+                'Affordable price',
+                'Versatile and easy to wear',
+                'Quality clothes'
+            ]
+        },
+        { 
+            title: 'Elevated', 
+            monthlyPrice: '$50', 
+            yearlyPrice: '$550', 
+            features: [
+                'Access to latest trends and styles',
+                'Stands out from the crowd',
+                'High-quality and on-trend',
+                'Curated selection of mid-range clothing and accessories'
+            ]
+        },
+        { 
+            title: 'Deluxe', 
+            monthlyPrice: '$120',
+            yearlyPrice: '$1350',
+            features: [
+                'Exclusive items',
+                'Finest quality clothing and accessories',
+                'Unmatched luxury fashion experience'
+            ]
+        },
+    ];
 
-    const[index,setIndex] = useState(0);
+
+    const handleClick = (i) => {
+        setIndex(i);
+        navigate("/address");
+    };
 
     return (
-        <body>
-            <div id="wrapper_plan">
-                <div id="navbar_plan">
-                    <ul id="list_plan">
-                        <a href="/plan-selection">Select Plan</a>
-                        <a href="/address">Address</a>
-                        <a href="/checkout">Checkout</a>
-                        <a href="/clothes-selection">Select Clothes</a>
-                    </ul>
-                </div>
-                <h1>Choose your plan</h1>
-                <div id="tabsList_plan">
-                        <label>Bill me</label>
-                        <label className="tab_label_plan" onClick={()=>{setIndex(0)}}>Monthly</label>
-                        <label className="tab_label_plan" onClick={()=>{setIndex(1)}}>Yearly</label>
-                </div>
-                <div id="wrapperPlans_plan">
-                    <div className="choicePlans_plan">
-                        <h5>Essentials</h5>
-                        <h1 hidden={index !==0}>24$ / MONTH</h1>
-                        <h1 hidden={index !==1}>276$ / YEAR</h1>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic} alt="icon_acrylic"></img>
-                            <label>Affordable price</label>
+        <div className="page-container">
+            <h2 className="plan-title">Select Your Plan</h2>
+            <div className="billing-options text-center mb-4">
+    <span className="billing-text">Bill me </span>
+    <span 
+        onClick={() => setBilling('monthly')} 
+        className={billing === 'monthly' ? 'billing-active' : 'billing-option'}
+    >
+        Monthly
+    </span>
+    <span className="divider"> • </span>
+    <span 
+        onClick={() => setBilling('yearly')} 
+        className={billing === 'yearly' ? 'billing-active' : 'billing-option'}
+    >
+        Yearly
+    </span>
+</div>
+            <div className="container mt-5">
+    <div className="row plan-container">
+        {plans.map((plan, i) => (
+            <div key={i} className="col-md-4">
+                <div className="card plan-card">
+                    <div className="card-body">
+                    <div className="title-container">
+
+                        <h5 className="card-title">{plan.title}</h5>
+                        {plan.title === 'Elevated' && <span className="best-tag">BEST!</span>}
                         </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic} alt="icon_acrylic"></img>
-                            <label>Versatile and easy to wear</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic} alt="icon_acrylic"></img>
-                            <label>Quality clothes</label>
-                        </div>
-                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
-                    </div>
-                    <div className="choicePlans_plan">
-                        <div id="wrapperElevated">
-                            <h5>Elevated</h5>
-                            <label id="bestLabel">  BEST! </label>
-                        </div>
-                        
-                        <h1 hidden={index !==0}>50$ / MONTH</h1>
-                        <h1 hidden={index !==1}>576$ / YEAR</h1>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
-                            <label>Access to latest trends and styles</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
-                            <label>Stands out from the crowd</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
-                            <label>High-quality and on-trend</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_yellow} alt="icon_acrylic_yellow"></img>
-                            <label>Curated selection of mid-range clothing and accessories</label>
-                        </div>
-                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
-                    </div>
-                    <div className="choicePlans_plan">
-                        <h5>Deluxe</h5>
-                        <h1 hidden={index !==0}>120$ / MONTH</h1>
-                        <h1 hidden={index !==1}>1200$ / YEAR</h1>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
-                            <label>Exclusive items</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
-                            <label>Finest quality clothing and accessories</label>
-                        </div>
-                        <div className="checkPlans_plan">
-                            <img src={icon_acrylic_green} alt="icon_acrylic_green"></img>
-                            <label>Unmatched luxury fashion experience</label>
-                        </div>
-                        <button className="planSelection" onClick={handleClick}>Choose plan</button>
+                        <h6 className="price-text">
+                            {billing === 'monthly' ? plan.monthlyPrice : plan.yearlyPrice}
+                            <span className="billing-cycle"> / {billing === 'monthly' ? 'month' : 'year'}</span>
+                        </h6>
+                        <ul className="list-unstyled features-list">
+                            {plan.features.map((feature, index) => (
+                                <li key={index}><span role="img" aria-label="check">✔️</span> {feature}</li>
+                            ))}
+                        </ul>
+                        <button className="plan-btn btn btn-primary" onClick={() => handleClick(i)}>Choose Plan</button>
                     </div>
                 </div>
-                
             </div>
-            <Footer></Footer>
-        </body>
-    )
+        ))}
+    </div>
+</div>
+        </div>
+    );
 }
 
-export default PlanSelection
+export default PlanSelection;

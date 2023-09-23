@@ -8,6 +8,8 @@ import PlanSelection from "./Forms/PlanSelection";
 import Address from "./Forms/Address";
 import Checkout from "./Forms/Checkout";
 import SelectClothes from "./Forms/SelectClothes";
+import 'bootstrap/dist/css/bootstrap.min.css';
+
 
 
 
