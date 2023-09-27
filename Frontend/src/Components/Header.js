@@ -8,7 +8,7 @@ function Header() {
     return (
         <header className="header">
             <div className="logo-container">
-                <p>logo</p>
+                <p>Dapper</p>
             </div>
             <nav className="nav">
                 <ul className="nav-list">

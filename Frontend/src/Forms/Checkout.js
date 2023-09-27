@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import '../Styles/Checkout.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faCreditCard, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
 import { faPaypal, faCcVisa, faCcMastercard, faCcAmex } from '@fortawesome/free-brands-svg-icons';
@@ -44,7 +43,7 @@ function Checkout() {
                                             <h6>Card number</h6>
                                         </label>
                                             <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required />
-                                                <div class="input-group-append"> <span class="input-group-text text-muted"> <FontAwesomeIcon icon={faCcVisa}></FontAwesomeIcon> <FontAwesomeIcon icon={faCcMastercard}></FontAwesomeIcon> <FontAwesomeIcon icon={faCcAmex}></FontAwesomeIcon> </span> </div>
+                                                <div class="input-group-append"> <span class="input-group-text text-muted" style={{display:"flex", flexDirection:"row", gap:"5%", width:"100%", height:"100%"}}> <FontAwesomeIcon icon={faCcVisa} ></FontAwesomeIcon> <FontAwesomeIcon icon={faCcMastercard} ></FontAwesomeIcon> <FontAwesomeIcon icon={faCcAmex} ></FontAwesomeIcon> </span> </div>
                                             </div>
                                         </div>
                                         <div class="row">
@@ -61,7 +60,7 @@ function Checkout() {
                                                 </label> <input type="text" required class="form-control" /> </div>
                                             </div>
                                         </div>
-                                        <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button> </div>
+                                        <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm" style={{width:"100%"}}> Confirm Payment </button> </div>
                                     </form>
                                 </div>
                                 <div id="paypal" className={`tab-pane fade ${activeTab === 'paypal' ? 'show active' : ''} pt-3`}>

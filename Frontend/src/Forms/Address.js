@@ -150,7 +150,7 @@ function Address() {
 
                                 <div className="dropdown" style={{ display: 'flex', flexDirection: 'column' }}>
                                     <label className="form-label" htmlFor="deliveryDropdown">Delivery Instructions</label>
-                                    <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown">
+                                    <button type="button" className="btn btn-primary dropdown-toggle" data-bs-toggle="dropdown" style={{ marginBottom:"1%" }}>
                                         {deliveryOption}
                                     </button>
                                     <ul className="dropdown-menu">
@@ -173,7 +173,7 @@ function Address() {
 
 
                                 <div class="form-check d-flex justify-content-center mb-2">
-                                    <a class="btn btn-primary" href="checkout" role="button">Continue</a>
+                                    <a class="btn btn-primary" href="checkout" role="button" style={{width:"100%", marginRight:"2%"}}>Continue</a>
                                 </div>
                             </form>
                         </div>
