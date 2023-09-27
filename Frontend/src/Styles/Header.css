@@ -1,0 +1,42 @@
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    background-color: #f4f4f4;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+}
+
+.logo {
+    max-width: 100px; 
+    max-height: 50px; 
+}
+
+.nav {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.nav-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.icon {
+    margin-right: 5px;
+}

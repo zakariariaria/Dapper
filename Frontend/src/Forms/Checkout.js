@@ -1,84 +1,83 @@
-import React,  {useState} from 'react';
-import { useNavigate} from 'react-router-dom';
-import '../Styles/Checkout.css'
-import icon_acrylic_grey from '../Images/icon-acrylic-grey.png'
-import icon_acrylic_green from '../Images/icon-acrylic-green.png'
-import visa from '../Images/Visa.png'
-import amex from '../Images/Amex.png'
-import mastercard from '../Images/Mastercard.png'
-import PayPal_icon from '../Images/PayPal_icon.png'
-import Footer from '../Components/Footer';
-
-
+import React, { useState } from 'react';
+import '../Styles/Checkout.css';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faCreditCard, faQuestionCircle } from '@fortawesome/free-solid-svg-icons';
+import { faPaypal, faCcVisa, faCcMastercard, faCcAmex } from '@fortawesome/free-brands-svg-icons';
+import '@fortawesome/fontawesome-svg-core/styles.css';
+import Header from "../Components/Header";
 
 function Checkout() {
-
-
-    const[index,setIndex] = useState(0);
-
-    const navigate = useNavigate();
-
-    function handleClick(){
-        navigate("/clothes-selection")
-    }
+    const [activeTab, setActiveTab] = useState('credit-card');
 
     return (
-        <body>
-            <div id="wrapper_checkout">
-                <div id="navbar_checkout">
-                    <ul id="list_checkout">
-                        <a href="/plan-selection">Select Plan</a>
-                        <a href="/address">Address</a>
-                        <a href="/checkout">Checkout</a>
-                        <a href="/clothes-selection">Select Clothes</a>
-                    </ul>
-                </div>
-                <div id="wrapper_infocheckout">
-                    <div className="creditcard_checkout" onClick={()=>{setIndex(1)}} >
-                        <div id="labelCreditCard_checkout">
-                            <img src={icon_acrylic_grey} alt="icon_acrylic_grey" hidden={index !==0}></img>
-                            <img src={icon_acrylic_grey}  alt="icon_acrylic_grey" hidden={index !==2}></img>
-                            <img src={icon_acrylic_green}  alt="icon_acrylic_green" hidden={index !==1}></img>
-                            <label>Add a credit card</label>
-                            <img src={amex} alt="amex"></img>
-                            <img src={mastercard} alt="mastercard"></img>
-                            <img src={visa} alt="visa"></img>
-                            <div id="inputCreditCard_checkout" hidden={index !==1}>
-                                <div className="inputLabels_checkout">
-                                    <label>Card number *</label>
-                                    <input type="text" placeholder="1234 5678 9102 3456"></input>
+        <div><Header></Header>
+        <div className="container py-5">
+            <div className="row">
+                <div className="col-lg-6 mx-auto">
+                    <div className="card ">
+                        <div className="card-header">
+                            <div className="bg-white shadow-sm pt-4 pl-2 pr-2 pb-2">
+                                <ul role="tablist" className="nav bg-light nav-pills rounded nav-fill mb-3">
+                                    <li className="nav-item">
+                                        <button
+                                            className={`nav-link ${activeTab === 'credit-card' ? 'active' : ''}`}
+                                            onClick={() => setActiveTab('credit-card')}>
+                                            <FontAwesomeIcon icon={faCreditCard} /> Credit Card
+                                        </button>
+                                    </li>
+                                    <li className="nav-item">
+                                        <button
+                                            className={`nav-link ${activeTab === 'paypal' ? 'active' : ''}`}
+                                            onClick={() => setActiveTab('paypal')}>
+                                            <FontAwesomeIcon icon={faPaypal} /> Paypal
+                                        </button>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div className="tab-content">
+                                <div id="credit-card" className={`tab-pane fade ${activeTab === 'credit-card' ? 'show active' : ''} pt-3`}>
+                                    <form role="form" onsubmit="event.preventDefault()">
+                                        <div class="form-group"> <label for="username">
+                                            <h6>Card Owner</h6>
+                                        </label> <input type="text" name="username" placeholder="Card Owner Name" required class="form-control " /> </div>
+                                        <div class="form-group"> <label for="cardNumber">
+                                            <h6>Card number</h6>
+                                        </label>
+                                            <div class="input-group"> <input type="text" name="cardNumber" placeholder="Valid card number" class="form-control " required />
+                                                <div class="input-group-append"> <span class="input-group-text text-muted"> <FontAwesomeIcon icon={faCcVisa}></FontAwesomeIcon> <FontAwesomeIcon icon={faCcMastercard}></FontAwesomeIcon> <FontAwesomeIcon icon={faCcAmex}></FontAwesomeIcon> </span> </div>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-8">
+                                                <div class="form-group"> <label><span class="hidden-xs">
+                                                    <h6>Expiration Date</h6>
+                                                </span></label>
+                                                    <div class="input-group"> <input type="number" placeholder="MM" name="" class="form-control" required /> <input type="number" placeholder="YY" name="" class="form-control" required /> </div>
+                                                </div>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <div class="form-group mb-4"> <label data-toggle="tooltip" title="Three digit CV code on the back of your card">
+                                                    <h6>CVV <FontAwesomeIcon icon={faQuestionCircle}></FontAwesomeIcon></h6>
+                                                </label> <input type="text" required class="form-control" /> </div>
+                                            </div>
+                                        </div>
+                                        <div class="card-footer"> <button type="button" class="subscribe btn btn-primary btn-block shadow-sm"> Confirm Payment </button> </div>
+                                    </form>
                                 </div>
-                                <div className="inputLabels_checkout">
-                                    <label>Expiry date *</label>
-                                    <input type="text" placeholder="MM/YY"></input>
-                                </div>
-                                <div className="inputLabels_checkout">
-                                    <label>Security code *</label>
-                                    <input type="text" placeholder="123"></input>
+                                <div id="paypal" className={`tab-pane fade ${activeTab === 'paypal' ? 'show active' : ''} pt-3`}>
+                                    <h6 class="pb-2">Select your paypal account type</h6>
+                                    <div class="form-group "> <label class="radio-inline"> <input type="radio" name="optradio" checked /> Domestic </label> <label class="radio-inline"> <input type="radio" name="optradio" class="ml-5" />International </label></div>
+                                    <p> <button type="button" class="btn btn-primary "><i class="fab fa-paypal mr-2"></i> Log into my Paypal</button> </p>
+                                    <p class="text-muted"> Note: After clicking on the button, you will be directed to a secure gateway for payment. After completing the payment process, you will be redirected back to the website to view details of your order. </p>
                                 </div>
                             </div>
                         </div>
                     </div>
-                    <div className="creditcard_checkout" onClick={()=>{setIndex(2)}} >
-                        <div id="iconsPaypal_checkout" >
-                            <img src={icon_acrylic_grey} alt="icon_acrylic_grey" hidden={index !==0}></img>
-                            <img src={icon_acrylic_grey} alt="icon_acrylic_grey" hidden={index !==1}></img>
-                            <img src={icon_acrylic_green} alt="icon_acrylic_green" hidden={index !==2}></img>
-                            <label>Add a PayPal account</label>
-                            <img src={PayPal_icon} alt="PayPal_icon"></img>
-                        </div>
-                            
-                            <label hidden={index !==2}>Add your PayPal account info after you place your order.</label>
-
-                    </div>
-                    <label>By clicking "Place order & Select Clothes" I accept the <a href="/">terms and conditions</a> and I have read the <a href="/">privacy policy</a></label>
-                    <button onClick={handleClick}>Place Order & Select Clothes</button>
                 </div>
-                <Footer></Footer>
             </div>
-            
-        </body>
-    )
+        </div>
+        </div>
+    );
 }
 
-export default Checkout
+export default Checkout;
