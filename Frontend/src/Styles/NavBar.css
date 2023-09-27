@@ -3,13 +3,13 @@
   justify-content: space-between; /* Distribute space between elements */
   align-items: center; /* Vertically align elements */
   font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
-    background-color: #DDD0C8;
+    background-color: #0e1111;
   color: white;
 }
 
 a {
-  text-decoration: none;
-  color: #323232;
+  text-decoration: none !important;
+  color: white !important;
   font-size: 18px;
   white-space: nowrap;
   transition: color 0.3s ease, 
@@ -20,10 +20,10 @@ a:hover {
 }
 
 #button_list button {
-  background-color: #323232;
+  background-color: white;
   font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
   white-space: nowrap;
-  color: white;
+  color: #323232;
   border: none;
   padding: 5px 10px;
   cursor: pointer;

@@ -21,7 +21,6 @@ function Home() {
             <button className="plans_button_home">View our plans</button>
           </div>
         </div>
-        <hr className="line_home"></hr>
 
         <div id="wrapper_work_home">
           <div className="wrapper_how_it_works">
@@ -47,11 +46,10 @@ function Home() {
                 <label>Curated outfits</label>
               </div>
             </div>
-            <button>Learn more</button>
+            <button className="plans_button_home">Learn more</button>
           </div>
-          {/* --------------------------- */}
-          <hr className="line_home"></hr>
-          <div className="wrapper_how_it_works">
+        
+          <div className="wrapper_see_our_styles">
             <motion.h2 whileHover={{scale: 1.1}}>Your box, your way</motion.h2>
             <motion.label>
               Flexible options to make you look dapper and customize your box
@@ -108,13 +106,13 @@ function Home() {
                   }}
                   src={formalcouture}
                 ></img>{" "}
-       <motion.h3 whileHover={{ scale: 1.1 }}>Formal wears</motion.h3>
-      <motion.label whileHover={{ scale: 1.1 }}>
+       <motion.h3 >Formal wears</motion.h3>
+      <motion.label >
         For the most formal of occasions
       </motion.label>
               </div>
             </div>
-            <button>See our styles</button>
+            <button className="plans_button_home">See our styles</button>
           </div>
         </div>
         <hr className="line_home"></hr>
