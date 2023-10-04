@@ -7,10 +7,91 @@ import hautecouture from "../Images/hauteCouture_clothing.jpg";
 import vintagecouture from "../Images/vintage_clothing.jpg";
 import formalcouture from "../Images/formalWear_couture.jpg";
 import casualcouture from "../Images/casual_clothing.jpg";
-import { motion } from 'framer-motion';
+import hanger from "../Images/hanger.jpg";
+import whitebox from "../Images/whitebox.jpg";
+import delievry from "../Images/delivery.jpg";
+import { useEffect, useState } from "react";
 
+import { motion } from "framer-motion";
 
 function Home() {
+  const [isHowItWorksInView, setIsHowItWorksInView] = useState(false);
+  const [isSeeOurStylesInView, setIsSeeOurStylesInView] = useState(false);
+
+ // const [isInView, setIsInView] = useState(false);
+ const truckMotion = {
+  rest: {
+    x: 0,
+  },
+  hover: {
+    x: 50, // 50px to the right, adjust as needed
+    transition: {
+      type: 'tween',
+      duration: 1.0, 
+      ease: "easeInOut"
+    },
+  },
+};
+
+  const fadeIn = {
+    initial: {
+      opacity: 0,
+      y: 20,
+    },
+    animate: {
+      opacity: 1,
+      y: 0,
+      transition: {
+        duration: 1,
+      },
+    },
+  };
+
+  useEffect(() => {
+    const howItWorksObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsHowItWorksInView(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    const seeOurStylesObserver = new IntersectionObserver(
+      ([entry]) => {
+        setIsSeeOurStylesInView(entry.isIntersecting);
+      },
+      {
+        root: null,
+        rootMargin: "0px",
+        threshold: 0.1,
+      }
+    );
+
+    const howItWorksEl = document.querySelector(".wrapper_how_it_works");
+    const seeOurStylesEl = document.querySelector(".wrapper_see_our_styles");
+
+    if (howItWorksEl) {
+      howItWorksObserver.observe(howItWorksEl);
+    }
+
+    if (seeOurStylesEl) {
+      seeOurStylesObserver.observe(seeOurStylesEl);
+    }
+
+    return () => {
+      if (howItWorksEl) {
+        howItWorksObserver.unobserve(howItWorksEl);
+      }
+      if (seeOurStylesEl) {
+        seeOurStylesObserver.unobserve(seeOurStylesEl);
+      }
+    };
+}, []);
+
+
   return (
     <body>
       <div id="container_home">
@@ -23,7 +104,12 @@ function Home() {
         </div>
 
         <div id="wrapper_work_home">
-          <div className="wrapper_how_it_works">
+          <motion.div
+            className="wrapper_how_it_works"
+            initial={isHowItWorksInView ? "initial" : "animate"}
+            animate={isHowItWorksInView ? "animate" : "initial"}
+            variants={fadeIn}
+          >
             <h2>How it works</h2>
             <ul id="work_list">
               <li>Choose your clothes</li>
@@ -31,29 +117,38 @@ function Home() {
             </ul>
             <div className="wrapper_images_home">
               <div className="wrapper_choices">
-                <img className="placeholder"></img>
+                <img className="placeholder" src={hanger}></img>
                 <h3>Choose your clothes</h3>
                 <label>Curated outfits</label>
               </div>
               <div className="wrapper_choices">
-                <img className="placeholder"></img>
+                <img className="placeholder" src={whitebox}></img>
                 <h3>Create the perfect box</h3>
                 <label>Curated outfits</label>
               </div>
               <div className="wrapper_choices">
-                <img className="placeholder"></img>
-                <h3>Get convenient deliveries</h3>
+              <motion.img
+  className="placeholder"
+  src={delievry}
+  variants={truckMotion}
+  initial="rest"
+  whileHover="hover"
+/>                <h3>Get convenient deliveries</h3>
                 <label>Curated outfits</label>
               </div>
             </div>
             <button className="plans_button_home">Learn more</button>
-          </div>
-        
-          <div className="wrapper_see_our_styles">
-            <motion.h2 whileHover={{scale: 1.1}}>Your box, your way</motion.h2>
-            <motion.label>
+          </motion.div>
+          <motion.div
+           className="wrapper_see_our_styles"
+           initial={isSeeOurStylesInView ? "initial" : "animate"}
+           animate={isSeeOurStylesInView ? "animate" : "initial"}
+           variants={fadeIn}
+          >
+            <h2>Your box, your way</h2>
+            <label>
               Flexible options to make you look dapper and customize your box
-            </motion.label>
+            </label>
             <div className="wrapper_images_home">
               <div className="wrapper_choices">
                 <img
@@ -65,10 +160,10 @@ function Home() {
                   }}
                   src={casualcouture}
                 ></img>
-                <motion.h3>Casual wear</motion.h3>
-                <motion.label>
+                <h3>Casual wear</h3>
+                <label>
                   Occasional, spontaneous and suited for everyday use
-                </motion.label>
+                </label>
               </div>
               <div className="wrapper_choices">
                 <img
@@ -80,8 +175,8 @@ function Home() {
                   }}
                   src={vintagecouture}
                 ></img>{" "}
-                <motion.h3>Vintage clothing</motion.h3>
-                <motion.label>Reflect the styles and trends of past eras</motion.label>
+                <h3>Vintage clothing</h3>
+                <label>Reflect the styles and trends of past eras</label>
               </div>
               <div className="wrapper_choices">
                 <img
@@ -93,8 +188,8 @@ function Home() {
                   }}
                   src={hautecouture}
                 ></img>{" "}
-                <motion.h3>Haute couture</motion.h3>
-                <motion.label>For those seeking high-end fashion design</motion.label>
+                <h3>Haute couture</h3>
+                <label>For those seeking high-end fashion design</label>
               </div>
               <div className="wrapper_choices">
                 <img
@@ -106,14 +201,12 @@ function Home() {
                   }}
                   src={formalcouture}
                 ></img>{" "}
-       <motion.h3 >Formal wears</motion.h3>
-      <motion.label >
-        For the most formal of occasions
-      </motion.label>
+                <h3>Formal wears</h3>
+                <label>For the most formal of occasions</label>
               </div>
             </div>
             <button className="plans_button_home">See our styles</button>
-          </div>
+          </motion.div>
         </div>
         <hr className="line_home"></hr>
 
