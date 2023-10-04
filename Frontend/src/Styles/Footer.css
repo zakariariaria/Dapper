@@ -1,5 +1,6 @@
-.footer-content{
+.footer-content {
     display: flex;
     flex-direction: row;
-
+    justify-content: center; /* Horizontally center */
+    align-items: center;     /* Vertically center */
 }

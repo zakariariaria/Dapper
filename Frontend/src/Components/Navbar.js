@@ -1,6 +1,7 @@
 import React from "react";
 import { useNavigate } from "react-router-dom";
-import "../Styles/NavBar.css"; // Import the CSS file with the correct path
+import { motion } from "framer-motion"; // Step 1: Import motion
+import "../Styles/NavBar.css";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,21 +13,62 @@ const Navbar = () => {
   function navSignup() {
     navigate("/register");
   }
+
+  // Step 2: Define the animation variants for the hover effect
+  const hoverVariant = {
+    hover: {
+      scale: 1.1,
+      transition: {
+        duration: 0.3
+      }
+    },
+    initial: {
+      scale: 1
+    }
+  };
+
   return (
     <div id="navbar_home">
-      <ul id="list">
-        <a href="/about">How it works</a>
-        <a href="/about">What we do</a>
-        <a href="/about">Contact us</a>
-      </ul>
-
-        <a  href="/">Dapper</a>
-   
-
-      <ul id="button_list">
+      <div className="logo_section">
+        <motion.a
+          href="/"
+          variants={hoverVariant}
+          initial="initial"
+          whileHover="hover"
+        >
+          Dapper
+        </motion.a>
+      </div>
+      <div className="navlinks_section">
+        <motion.a 
+          href="/about"
+          variants={hoverVariant}
+          initial="initial"
+          whileHover="hover"
+        >
+          How it works
+        </motion.a>
+        <motion.a 
+          href="/about"
+          variants={hoverVariant}
+          initial="initial"
+          whileHover="hover"
+        >
+          What we do
+        </motion.a>
+        <motion.a 
+          href="/about"
+          variants={hoverVariant}
+          initial="initial"
+          whileHover="hover"
+        >
+          Contact us
+        </motion.a>
+      </div>
+      <div className="buttons_section">
         <button onClick={navLogin}>Log In</button>
         <button onClick={navSignup}>Sign Up</button>
-      </ul>
+      </div>
     </div>
   );
 };

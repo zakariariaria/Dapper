@@ -5,10 +5,12 @@ class Footer extends React.Component {
   render() {
     return (
         <footer style={{
-            display: "flex",
-            flexDirection: "row",
-            gap: "5rem", 
-            padding:"5rem "
+          display: "flex",
+          flexDirection: "row",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "5rem",
+          padding: "5rem"
           }}>
             <a style={{ color: "black",textDecoration: "none"}}>2023 Dapper. All rights reserved.</a>
             <a href="#">Home</a>
