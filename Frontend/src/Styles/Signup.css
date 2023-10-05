@@ -33,19 +33,18 @@ input {
     outline: none;
 }
 
-button {
+.signup-button {
     width: 100%;
     padding: 10px;
     background-color: #4a90e2;
     color: #fff;
     border: none;
-    border-radius: 5px !important
-    ;
+    border-radius: 5px !important;
     cursor: pointer;
     transition: background-color 0.3s;
 }
 
-.button:hover {
+.signup-button:hover {
     background-color: #357ab7;
 }
 

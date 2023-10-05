@@ -93,7 +93,7 @@ function Home() {
 
 
   return (
-    <body>
+    <body className="home-page">
       <div id="container_home">
         <Navbar></Navbar>
         <div id="wrapper_home">

@@ -2,6 +2,8 @@ import React from 'react';
 import { useNavigate} from 'react-router-dom';
 import '../Styles/Login.css'
 import  { useState } from 'react';
+import Navbar from "../Components/Navbar";
+
 
 
 
@@ -26,7 +28,9 @@ function Login() {
 
    
     return (
-       
+        <>
+        <Navbar></Navbar>
+
         <div className="login-container">
             <h2>Login</h2>
             <form onSubmit={handleSubmit}>
@@ -48,7 +52,7 @@ function Login() {
                         required
                     />
                 </div>
-                <button type="submit">Login</button>
+                <button className="login-button" type="submit">Login</button>
                 <div className="forgot-password">
                     <a href="#">Forgot Password?</a>
                 </div>
@@ -57,6 +61,7 @@ function Login() {
                 Don't have an account? <a onClick={handleClick}>Sign up</a>
             </div>
         </div>
+        </>
        
     );
 }

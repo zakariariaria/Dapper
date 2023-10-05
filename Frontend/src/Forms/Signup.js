@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../Styles/Signup.css'
+import Navbar from "../Components/Navbar";
+
 
 
 
@@ -8,7 +10,7 @@ function Signup() {
 
     const navigate = useNavigate();
     function handleClick(){
-        navigate("/register")
+        navigate("/login")
     }
 
     function navPlanSelection(){
@@ -39,8 +41,9 @@ function Signup() {
     };
 
     return (
-       
-       
+       <>
+        <Navbar></Navbar>
+
             <div className="signup-container">
                 <h2>Sign Up</h2>
 
@@ -93,13 +96,14 @@ function Signup() {
                         />
                         {errorMessage && <p className="error-message">{errorMessage}</p>}
                     </div>
-                    <button type="submit">Create Account</button>
+                    <button className = "signup-button" type="submit">Create Account</button>
                  
                 </form>
                 <div className="login-section">
                    Already have an account ? <a onClick={handleClick}>Log in</a>
                 </div>
             </div>
+            </>
            
         );
 }
