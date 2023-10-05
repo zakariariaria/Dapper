@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import '../Styles/Signup.css'
 
@@ -7,57 +7,101 @@ import '../Styles/Signup.css'
 function Signup() {
 
     const navigate = useNavigate();
+    function handleClick(){
+        navigate("/register")
+    }
 
     function navPlanSelection(){
         navigate("/plan-selection")
     }
     
+    const [firstName, setFirstName] = useState('');
+    const [lastName, setLastName] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [confirmPassword, setConfirmPassword] = useState('');
+    const [errorMessage, setErrorMessage] = useState('');  // New state for error messages
+    const handleConfirmPasswordChange = (e) => {
+        // Whenever the confirm password input is changed, clear the error message
+        setErrorMessage('');
+        setConfirmPassword(e.target.value);
+    };
+    
+
+
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        if (password !== confirmPassword) {
+            setErrorMessage('Passwords do not match!');
+            return;
+        }
+        // console.log('First Name:', firstName, 'Last Name:', lastName, 'Email:', email, 'Password:', password, 'Confirm Password:', confirmPassword);
+    };
+
     return (
-        <body>
-            <div id="wrapper_signup">
-                <div id="left_wrapper_signup">
+       
+       
+            <div className="signup-container">
+                <h2>Sign Up</h2>
 
-                    <div id="logo_signup">
-                        <label>Dapper</label>
+                <form onSubmit={handleSubmit}>
+                    <div className="input-container">
+                        <label>First Name</label>
+                        <input
+                            type="text"
+                            value={firstName}
+                            onChange={(e) => setFirstName(e.target.value)}
+                            required
+                        />
                     </div>
-                
+                    <div className="input-container">
+                        <label>Last Name</label>
+                        <input
+                            type="text"
+                            value={lastName}
+                            onChange={(e) => setLastName(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-container">
+                        <label>Email</label>
+                        <input
+                            type="email"
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-container">
+                        <label>Password</label>
+                        <input
+                            type="password"
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+                    <div className="input-container">
+                        <label>Confirm Password</label>
+                        <input
+                            type="password"
+                            value={confirmPassword}
+                            onChange={handleConfirmPasswordChange}
+                            required
+                            className={errorMessage ? 'error-input' : ''} 
+
+                        />
+                        {errorMessage && <p className="error-message">{errorMessage}</p>}
+                    </div>
+                    <button type="submit">Create Account</button>
+                 
+                </form>
+                <div className="login-section">
+                   Already have an account ? <a onClick={handleClick}>Log in</a>
                 </div>
-                <div id="right_wrapper_signup">
-
-                    <h1 id="title_signup">Sign up to Dapper</h1>
-
-                    <div id="info_wrapper_signup">
-
-                        <div id="name_wrapper_signup">
-                            <div className="names">
-                                <label>First Name</label>
-                                <input type="text" className='input_fullname_signup' id="test1"></input>
-                            </div>
-                            <div className="names">
-                                <label>Last Name</label>
-                                <input type="text" className='input_fullname_signup' id="test2"></input>
-                            </div>
-                        </div>
-
-                        <label className="input_labels_signup">Email</label>
-                        <input type="text" className='input_signup'></input>
-                        <label className="input_labels_signup">Password</label>
-                        <input type="text" className='input_signup'></input>
-                        <div id="checkbox_wrapper">
-                            <input type="checkbox"></input>
-                            <label>I agree with Dapper's <a href="#">Terms of Service</a>, <a href="#">Privacy Policy</a></label>
-                        </div>
-                        <button id="confirm_button_signup" onClick={navPlanSelection}>Create account</button>
-                        <label id="login_router_signup">Already have an account? <a href="login">Sign in</a></label>
-                    </div>      
-                </div>
-                
-                
-            
-         </div>
-        </body>
-        
-    )
+            </div>
+           
+        );
 }
 
 export default Signup
