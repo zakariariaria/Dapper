@@ -97,10 +97,10 @@ function Home() {
       <div id="container_home">
         <Navbar></Navbar>
         <div id="wrapper_home">
-          <div id="wrapper_title">
+          {/* <div id="wrapper_title">
             <h1 className="bannerTitle">We help you look your best</h1>
             <button className="plans_button_home">View our plans</button>
-          </div>
+          </div> */}
         </div>
 
         <div id="wrapper_work_home">
