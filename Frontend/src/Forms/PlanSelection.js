@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import '../Styles/PlanSelection.css';
 import Header from "../Components/Header";
+import Navbar from "../Components/Navbar";
+
 
 function PlanSelection() {
     const navigate = useNavigate();
@@ -50,7 +52,9 @@ function PlanSelection() {
     };
 
     return (
-        <div><Header></Header>
+        <div>
+               <Navbar></Navbar>
+               <Header></Header>
             <div className="page-container">
                 <h2 className="plan-title">Select Your Plan</h2>
                 <div className="billing-options text-center mb-4">
