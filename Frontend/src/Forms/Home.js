@@ -3,8 +3,8 @@ import "../Styles/Home.css";
 import placeholder from "../Images/placeholder-image.png";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
-import hautecouture from "../Images/hauteCouture_clothing.jpg";
-import vintagecouture from "../Images/vintage_clothing.jpg";
+import sportswear from "../Images/sportswear.jpg";
+import oldmoney from "../Images/old-money.jpg";
 import formalcouture from "../Images/formalWear_couture.jpg";
 import casualcouture from "../Images/casual_clothing.jpg";
 import hanger from "../Images/hanger.jpg";
@@ -173,10 +173,10 @@ function Home() {
                     width: "300px",
                     objectFit: "cover",
                   }}
-                  src={vintagecouture}
+                  src={oldmoney}
                 ></img>{" "}
-                <h3>Vintage clothing</h3>
-                <label>Reflect the styles and trends of past eras</label>
+                <h3>Old Money</h3>
+                <label>Aesthetic based around a wealthy, classic style</label>
               </div>
               <div className="wrapper_choices">
                 <img
@@ -186,10 +186,10 @@ function Home() {
                     width: "300px",
                     objectFit: "cover",
                   }}
-                  src={hautecouture}
+                  src={sportswear}
                 ></img>{" "}
-                <h3>Haute couture</h3>
-                <label>For those seeking high-end fashion design</label>
+                <h3>Sportswear</h3>
+                <label>For those embracing style in motion</label>
               </div>
               <div className="wrapper_choices">
                 <img
