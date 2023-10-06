@@ -28,7 +28,7 @@ function Login() {
 
    
     return (
-        <>
+        <div className="loginPage-container">
         <Navbar></Navbar>
 
         <div className="login-container">
@@ -61,7 +61,7 @@ function Login() {
                 Don't have an account? <a onClick={handleClick}>Sign up</a>
             </div>
         </div>
-        </>
+        </div>
        
     );
 }
