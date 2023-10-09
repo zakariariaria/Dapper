@@ -1,3 +1,4 @@
+
 CREATE TABLE IF NOT EXISTS `customer`
 (
   /*------------------------*/
@@ -8,7 +9,7 @@ CREATE TABLE IF NOT EXISTS `customer`
   subscription_price VARCHAR(255),
   preference_size VARCHAR(255),
   user_name VARCHAR(255),
-    PRIMARY KEY(subscription_price)
+  PRIMARY KEY(user_name)
 
 );
 
@@ -27,7 +28,7 @@ CREATE TABLE IF NOT EXISTS `user`
   email_address VARCHAR(255),
   password VARCHAR(255),
   user_id INT,
-  PRIMARY KEY(name)
+  PRIMARY KEY(user_id)
 
 );
 
@@ -47,7 +48,7 @@ CREATE TABLE IF NOT EXISTS `stylist`
   /*stylist Attributes*/
   bio VARCHAR(255),
   profile_picture_url VARCHAR(255),
-  PRIMARY KEY(bio)
+  PRIMARY KEY(user_name)
 
 );
 
@@ -68,7 +69,7 @@ CREATE TABLE IF NOT EXISTS `review`
   rating INT,
   comment VARCHAR(255),
   rating_id VARCHAR(255),
-  PRIMARY KEY(rating)
+  PRIMARY KEY(rating_id)
 
 );
 
@@ -105,12 +106,12 @@ CREATE TABLE IF NOT EXISTS `item`
   /*item Attributes*/
   size VARCHAR(255),
   price VARCHAR(255),
-  UNKNOWN ID: attributeMany List<VARCHAR(255)>,
+  seasons VARCHAR(255),
   color_scheme VARCHAR(255),
   brand VARCHAR(255),
   item_id VARCHAR(255),
   image_url VARCHAR(255),
-  PRIMARY KEY(size)
+  PRIMARY KEY(item_id)
 
 );
 
@@ -184,35 +185,6 @@ CREATE TABLE IF NOT EXISTS `preference`
 
 
 
-CREATE TABLE IF NOT EXISTS `subscription`
-(
-  /*------------------------*/
-  /* MEMBER VARIABLES       */
-  /*------------------------*/
-
-  /*subscription Associations*/
-  customer_subscription_price VARCHAR(255),
-  
-  /*subscription Attributes*/
-  price VARCHAR(255),
-  type VARCHAR(255),
-  start_date DATE,
-  end_date DATE,
-  outfits_per_month INT,
-  subscription_price VARCHAR(255),
-  subscription_price VARCHAR(255),
-  subscription_price VARCHAR(255),
-  subscription_price VARCHAR(255),
-  subscription_price VARCHAR(255),
-  subscription_price VARCHAR(255),
-  PRIMARY KEY(price)
-
-);
-
-
-
-
-
 CREATE TABLE IF NOT EXISTS `payment_information`
 (
   /*------------------------*/
@@ -249,7 +221,7 @@ CREATE TABLE IF NOT EXISTS `address`
   city VARCHAR(255),
   province VARCHAR(255),
   country VARCHAR(255),
-  PRIMARY KEY(address)
+  PRIMARY KEY(postal_code)
 
 );
 

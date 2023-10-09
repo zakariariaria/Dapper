@@ -24,6 +24,7 @@ services:
     links:
       - db
   db:
+    # run with $mysql -u 1ctps9du2blghondeiey -ppscale_pw_tqg3yFejQGKphFa4aCb4aFXPHlaqlrdHYbCCQZ7Yy1Y dapper
     platform: linux/x86_64
     image: mysql:5.7
     ports:
