@@ -41,7 +41,7 @@ function Signup() {
     };
 
     return (
-       <>
+       <div className='page-signUp-container'>
         <Navbar></Navbar>
 
             <div className="signup-container">
@@ -103,7 +103,7 @@ function Signup() {
                    Already have an account ? <a onClick={handleClick}>Log in</a>
                 </div>
             </div>
-            </>
+            </div>
            
         );
 }

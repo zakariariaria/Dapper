@@ -38,8 +38,11 @@ letter-spacing: 0.2px;
     gap: 1rem;
     
     }
-    .plan-container {
+
+.plan-container {
         display: flex;
+        justify-content: space-evenly;
+
     }
     
     .plan-card {
