@@ -7,18 +7,7 @@ import Navbar from '../Components/Navbar';
 function Checkout() {
 
  
-      const Item = (props) => (
-        <div className="item-container">
-          <div className="item-image">
-            <img src={props.img}/>
-            <div className="item-details">
-              <h3 className="item-name"> {props.name} </h3>
-              <h2 className="item-price"> {props.price} </h2>
-            </div>
-          </div>
-        </div>
-      );
-      
+   
       const CheckoutForm = (props) => (
        <div className="checkout">
           <div className="checkout-container">
@@ -51,7 +40,19 @@ function Checkout() {
       const Button = (props) => (
         <button className="checkout-btn" type="button">{props.text}</button>
       );
-      
+      const Basket = () => {
+        return (
+            <div className="basket-container">
+                <h3 className="heading-3">Your Basket</h3>
+                <ul className="basket-items">
+                    <li>Item 1</li>
+                    <li>Item 2</li>
+                    <li>Item 3</li>
+                </ul>
+                <p className="total-price">Total Price: $XXX.XX</p>
+            </div>
+        );
+    }
       
       
       
@@ -61,6 +62,7 @@ function Checkout() {
     <Header></Header>
   <div className='container-page'>
     <CheckoutForm></CheckoutForm>
+    <div className='image-holder2'></div>
    
     </div>
     </>

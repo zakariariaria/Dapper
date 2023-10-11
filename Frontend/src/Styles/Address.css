@@ -1,20 +1,47 @@
+
 .container-page{
     display: flex;
+    flex-direction: row;
     justify-content: center;
     height: 100%;
+
+  
  
 }
+
 .address {
-    margin-top: 3rem;
-    height: 550px; 
-    width: 1200px;   
-    background: #2f2c33;
+    height: 100%; 
+    width: 100%;   
+    background: #0e1111;
     color: white;
     border-radius: 18px;
+    background: linear-gradient(to right, #0e1111, #1f282c);  /* Gradient transitioning from the form background to the image background */
+
+
+
 
     
   }
-  
+  @keyframes slideInFromRight {
+    from {
+        transform: translateX(100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
+
+
+  .image-holder{
+    background:url("../Images/deliveryTruck2.png");
+    background-size: cover;
+    background-position: 70% center;
+    width: 100%;
+    animation: slideInFromRight 0.8s ease-in-out; /* 2s is the duration of the animation. You can adjust as needed. */
+    overflow: hidden; 
+  }
+
+
   
   .address-container {
     padding: 35px 25px;

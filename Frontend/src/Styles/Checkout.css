@@ -1,17 +1,44 @@
 .container-page{
-    margin-top: 5rem;
     display: flex;
-    justify-content: center;
-  
+    justify-content: center; 
+
 }
 
-.checkout {
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+.image-holder2{
+    background: url("../Images/creditcard2.png");
+  background-size: cover;
+    background-position: 70% center;
+    width: 100%;
+    animation: fadeIn 0.8s ease-in-out; /* 2s is the duration of the animation. You can adjust as needed. */
+
+}
+    
+.basket-container{
     background: #2f2c33;
     color: white;
     border-radius: 18px;
-    padding: 20px; /* Add padding to the entire form */
-    max-width: 500px; /* Adjust if needed */
-    max-height: 500px;
+    height: 200px;
+    width: 300px;
+    padding: 35px 25px 35px 25px;
+
+  }
+  
+
+.checkout {
+    background: #0e1111;
+    color: white;
+    padding: 20px;
+    width: 100%;
+    background: linear-gradient(to right, #0e1111, #131818);  
 }
 
 .checkout-container {
@@ -22,7 +49,7 @@
     text-transform: uppercase;
     font-size: 16px;
     font-weight: 700;
-    margin-bottom: 20px; /* Space between the heading and the first input */
+    margin-bottom: 20px; 
 }
 
 .row {
