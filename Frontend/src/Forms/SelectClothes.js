@@ -1,63 +1,61 @@
-import React, { useState } from 'react';
-import Carousel from 'react-bootstrap/Carousel';
-import "react-responsive-carousel/lib/styles/carousel.min.css";
-import Navbar from '../Components/Navbar';
-import Header from '../Components/Header';
+import React, { useState, useEffect } from "react";
 import "../Styles/SelectClothes.css";
-import style1 from '../Images/streetwear1.webp';
-import style2 from '../Images/streetwear1.webp';
-import {
-    MDBCarousel,
-    MDBCarouselItem,
-  } from 'mdb-react-ui-kit';
+import streetWear from "../Images/alexander-andrews-jNKv4QohAk0-unsplash.jpg";
+import streetWear2 from "../Images/sportswear.jpg";
+import Header from "../Components/Header";
+import Navbar from "../Components/Navbar";
 
+const SelectClothes = () => {
+  const styles = [
+    { name: "Street Wear", images: [streetWear, streetWear] },
+    { name: "Cozy Wear", images: [streetWear, streetWear2] },
+  ];
 
+  const [activeStyleIndex, setActiveStyleIndex] = useState(0);
+  const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-export default function SelectClothes() {
-    const [selectedGender, setSelectedGender] = useState('Male');
-    const [selectedSize, setSelectedSize] = useState('Medium');
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveImageIndex((prevIndex) => (prevIndex + 1) % 2);
+    }, 3000);
+    return () => clearInterval(interval);
+  }, [activeStyleIndex]);
 
-    const styles = [
-        style1,
-        style2,
-        
-        // ... add more style images
-    ];
+  const nextStyle = () => {
+    setActiveStyleIndex((prevIndex) => (prevIndex + 1) % styles.length);
+  };
 
-    return (
-      
-            <MDBCarousel showIndicators showControls fade>
-              <MDBCarouselItem
-                className='w-100 d-block'
-                itemId={1}
-                src='https://mdbootstrap.com/img/Photos/Slides/img%20(15).jpg'
-                alt='...'
-              >
-                <h5>First slide label</h5>
-                <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-              </MDBCarouselItem>
-        
-              <MDBCarouselItem
-                className='w-100 d-block'
-                itemId={2}
-                src='https://mdbootstrap.com/img/Photos/Slides/img%20(22).jpg'
-                alt='...'
-              >
-                <h5>Second slide label</h5>
-                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-              </MDBCarouselItem>
-        
-              <MDBCarouselItem
-                className='w-100 d-block'
-                itemId={3}
-                src='https://mdbootstrap.com/img/Photos/Slides/img%20(23).jpg'
-                alt='...'
-              >
-                <h5>Third slide label</h5>
-                <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-              </MDBCarouselItem>
-            </MDBCarousel>
-         
+  const prevStyle = () => {
+    setActiveStyleIndex((prevIndex) => (prevIndex - 1 + styles.length) % styles.length);
+  };
 
-    );
-}
+  return (
+    <>
+      <Navbar />
+      <Header />
+      <div className="outer-container">
+        <h2 className="select-style-title">Select Your Style</h2>
+        <div className="carousel-wrapper">
+          <button className="carousel-button prev" onClick={prevStyle}>
+            &#60;
+          </button>
+          <div className="carousel-container">
+  {styles[activeStyleIndex].images.map((image, index) => (
+    <div
+      key={index}
+      className={`carousel-items ${index === activeImageIndex ? "active" : ""}`}
+    >
+      <img src={image} alt={`${styles[activeStyleIndex].name} ${index + 1}`} />
+    </div>
+  ))}
+</div>
+          <button className="carousel-button next" onClick={nextStyle}>
+            &#62;
+          </button>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default SelectClothes;

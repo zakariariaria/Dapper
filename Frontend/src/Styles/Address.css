@@ -37,7 +37,7 @@
     background-size: cover;
     background-position: 70% center;
     width: 100%;
-    animation: slideInFromRight 0.8s ease-in-out; /* 2s is the duration of the animation. You can adjust as needed. */
+    animation: slideInFromRight 0.2s ease-in-out; /* 2s is the duration of the animation. You can adjust as needed. */
     overflow: hidden; 
   }
 
