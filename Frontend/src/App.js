@@ -9,6 +9,7 @@ import Address from "./Forms/Address";
 import Checkout from "./Forms/Checkout";
 import SelectClothes from "./Forms/SelectClothes";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import BrowseStylists from "./Forms/BrowseStylists";
 
 
 
@@ -30,6 +31,7 @@ function App() {
         <Route path="/address" element={<Address/>}/>
         <Route path="/checkout" element={<Checkout/>}/>
         <Route path="/clothes-selection" element={<SelectClothes/>}/>
+        <Route path="/browse-stylist" element={<BrowseStylists/>}/>
       </Routes>
     </div>
   );

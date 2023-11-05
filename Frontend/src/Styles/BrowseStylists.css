@@ -1,0 +1,29 @@
+
+.profile-card-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px; /* This adds space between the cards */
+    justify-content: center; /* This centers the cards in the row */
+    align-items: stretch; /* This makes sure all cards are of equal height */
+  }
+  
+  /* Additional styling for individual cards, if needed */
+  .profile-card {
+    flex-basis: calc(33.333% - 20px); /* Adjust the percentage for how many cards you want in a row */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Example shadow for aesthetics */
+    /* More styles here for the appearance of the card */
+  }
+  
+  /* Responsive design for smaller screens */
+  @media (max-width: 768px) {
+    .profile-card {
+      flex-basis: calc(50% - 20px); /* 2 cards in a row on smaller screens */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .profile-card {
+      flex-basis: 100%; /* Full width on very small screens */
+    }
+  }
+  
