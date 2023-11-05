@@ -57,6 +57,9 @@
   .input {
     padding: 5px 0;
   }
+  .select {
+    padding: 5px 0;
+  }
   
   .input label {
     font-size: 12px;

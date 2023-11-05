@@ -10,7 +10,7 @@ function Checkout() {
    
       const CheckoutForm = (props) => (
        <div className="checkout">
-          <div className="checkout-container">
+          <div className="checkout-container" >
            <h3 className="heading-3">Credit card checkout</h3>
            <Input label="Cardholder's Name" type="text" name="name" />
            <Input label="Card Number" type="number" name="card_number" imgSrc="https://seeklogo.com/images/V/visa-logo-6F4057663D-seeklogo.com.png" />

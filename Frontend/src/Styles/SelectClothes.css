@@ -1,4 +1,20 @@
-.outer-container {
+.outer-container{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+
+}
+.heading-3-style {
+  text-transform: uppercase;
+  color: #ffffff;
+  font-size: 18px;
+  font-weight: 600;
+  padding-bottom: 20px;
+  letter-spacing: 1px;
+}
+
+.outer-container-1 {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -19,6 +35,34 @@
     font-weight: 900;
     letter-spacing: -1px;
   }
+
+  .style-name-display {
+    text-align: center;
+    margin-top: 1rem; 
+    color: #ffffff;
+    text-align: center;
+    font-family: Inter;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 900;
+    letter-spacing: -1px;
+  }
+  .custom-dropdown .dropdown-toggle {
+    width: 100%;
+    border-radius: 2;
+    background-color: #0e1111;
+    border-color: #2f2c33;
+  }
+  
+  .custom-dropdown-menu {
+    background-color: #2f2c33 !important; /* Overrides inline styles */
+  }
+  
+  .custom-dropdown-menu .dropdown-item {
+    background-color: #2f2c33 !important; /* Overrides inline styles */
+    /* Add custom hover styles here if needed */
+  }
+  
   
   
   .carousel-wrapper {
@@ -37,11 +81,32 @@
     background-color: #ffffff;
   }
   
-  .carousel-button {
+  .carousel-button-next {
     background: transparent;
+    color: #ffffff;
     border: none;
     font-size: 24px;
     cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for transform */
+
+    
+  }
+  .carousel-button-prev {
+    background: transparent;
+    color: #ffffff;
+    border: none;
+    font-size: 24px;
+    cursor: pointer;
+    transition: transform 0.3s ease; /* Smooth transition for transform */
+
+    
+  }
+  .carousel-button-next:hover {
+    transform: translateX(10px); /* Move to the right on hover */
+  }
+
+  .carousel-button-prev:hover {
+    transform: translateX(-10px); /* Move to the right on hover */
   }
   
   .carousel-items {
@@ -87,4 +152,67 @@
     height: 100%;
     object-fit: cover;
   }
-  
+
+
+  .custom-select {
+    width: 100%;
+    height: 40px;
+    padding: 10px;
+    border: 1px solid #78757c;
+    border-radius: 4px;
+    background-color: #0e1111;
+    position: relative;
+}
+
+.custom-select select {
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    font-size: 14px;
+    color:#ffffff;
+    font-size: 14px;
+    appearance: none;
+    background-color: #0e1111;
+    transition: all 2s;
+
+}
+
+.custom-select::after {
+    content: '\25BC';
+    position: absolute;
+    right: 10px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 12px;
+
+    pointer-events: none;
+    color: white; 
+
+}
+
+.carousel-finish-button{
+  background-color: white;
+  font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
+  white-space: nowrap;
+  color: #323232;
+  border: none;
+  padding: 5px 20px;
+  cursor: pointer;
+  border-radius: 18px;
+  transition: background-color 0.3s ease;
+  margin-top: 10px; 
+  font-size: 18px; 
+}
+.carousel-finish-button:hover {
+  background-color:#2f2c33;
+  color: #ffffff;
+}
+.outer-container-2{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+
+

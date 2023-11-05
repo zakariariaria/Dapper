@@ -3,7 +3,7 @@ import "../Styles/Home.css";
 import placeholder from "../Images/placeholder-image.png";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
-import sportswear from "../Images/sportswear.jpg";
+import sportswear from "../Images/SportWear.jpg";
 import oldmoney from "../Images/old-money.jpg";
 import formalcouture from "../Images/formalWear_couture.jpg";
 import casualcouture from "../Images/casual_clothing.jpg";
