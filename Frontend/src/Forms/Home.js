@@ -18,20 +18,20 @@ function Home() {
   const [isHowItWorksInView, setIsHowItWorksInView] = useState(false);
   const [isSeeOurStylesInView, setIsSeeOurStylesInView] = useState(false);
 
- // const [isInView, setIsInView] = useState(false);
- const truckMotion = {
-  rest: {
-    x: 0,
-  },
-  hover: {
-    x: 50, // 50px to the right, adjust as needed
-    transition: {
-      type: 'tween',
-      duration: 1.0, 
-      ease: "easeInOut"
+  // const [isInView, setIsInView] = useState(false);
+  const truckMotion = {
+    rest: {
+      x: 0,
     },
-  },
-};
+    hover: {
+      x: 50, // 50px to the right, adjust as needed
+      transition: {
+        type: 'tween',
+        duration: 1.0,
+        ease: "easeInOut"
+      },
+    },
+  };
 
   const fadeIn = {
     initial: {
@@ -89,7 +89,7 @@ function Home() {
         seeOurStylesObserver.unobserve(seeOurStylesEl);
       }
     };
-}, []);
+  }, []);
 
 
   return (
@@ -127,23 +127,23 @@ function Home() {
                 <label>Curated outfits</label>
               </div>
               <div className="wrapper_choices">
-              <motion.img
-  className="placeholder"
-  src={delievry}
-  variants={truckMotion}
-  initial="rest"
-  whileHover="hover"
-/>                <h3>Get convenient deliveries</h3>
+                <motion.img
+                  className="placeholder"
+                  src={delievry}
+                  variants={truckMotion}
+                  initial="rest"
+                  whileHover="hover"
+                />                <h3>Get convenient deliveries</h3>
                 <label>Curated outfits</label>
               </div>
             </div>
             <button className="plans_button_home">Learn more</button>
           </motion.div>
           <motion.div
-           className="wrapper_see_our_styles"
-           initial={isSeeOurStylesInView ? "initial" : "animate"}
-           animate={isSeeOurStylesInView ? "animate" : "initial"}
-           variants={fadeIn}
+            className="wrapper_see_our_styles"
+            initial={isSeeOurStylesInView ? "initial" : "animate"}
+            animate={isSeeOurStylesInView ? "animate" : "initial"}
+            variants={fadeIn}
           >
             <h2>Your box, your way</h2>
             <label>

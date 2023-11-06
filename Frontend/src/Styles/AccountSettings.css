@@ -16,8 +16,27 @@ body{
 
 .btn-default {
     border-color: rgba(24,28,33,0.1);
-    background: rgba(0,0,0,0);
-    color: #4E5155;
+    background: rgba(0,0,0,0) ;
+    color: white !important;
+}
+
+.btn-primary {
+    display: block;
+    background: white !important;
+    color: #2f2c33 !important;
+    font-size: 14px;
+    font-weight: 700;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    cursor: pointer;
+    margin-top: 20px; /* Add some space between the last input and the button */
+}
+
+.btn-primary:hover{
+    background-color: #2f2c33;
+    color: white;
+    transition: background-color 0.3s ease;
 }
 
 label.btn {
@@ -36,18 +55,6 @@ label.btn {
 
 .text-light {
     color: #babbbc !important;
-}
-
-.btn-facebook {
-    border-color: rgba(0,0,0,0);
-    background: #3B5998;
-    color: #fff;
-}
-
-.btn-instagram {
-    border-color: rgba(0,0,0,0);
-    background: #000;
-    color: #fff;
 }
 
 .row-bordered {
@@ -110,4 +117,10 @@ html:not(.dark-style) .account-settings-links .list-group-item.active {
 
 .mb-4 {
     color: white;
+}
+
+#bottom-buttons{
+    display: flex;
+    flex-direction:row;
+    justify-content: end;
 }

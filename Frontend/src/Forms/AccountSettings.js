@@ -70,11 +70,11 @@ const AccountSettings = () => {
                                     <div className="card-body">
                                         <div className="form-group">
                                             <label className="form-label">Name</label>
-                                            <input type="text" className="form-control" value="Nelle Maxwell" />
+                                            <input type="text" className="form-control"/>
                                         </div>
                                         <div className="form-group">
                                             <label className="form-label">E-mail</label>
-                                            <input type="text" className="form-control mb-1" value="nmaxwell@mail.com" />
+                                            <input type="text" className="form-control mb-1"/>
                                             <div className="alert alert-warning mt-3">
                                                 Your email is not confirmed. Please check your inbox.<br />
                                                 <a href="javascript:void(0)">Resend confirmation</a>
@@ -190,7 +190,7 @@ const AccountSettings = () => {
                     </div>
 
                 </div>
-                <div className="text-right mt-3">
+                <div className="text-right mt-3" id="bottom-buttons">
                     <button type="button" className="btn btn-primary">Save changes</button>&nbsp;
                     <button type="button" className="btn btn-default">Cancel</button>
                 </div>
