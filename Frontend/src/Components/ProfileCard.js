@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+
 import {
   MDBCol,
   MDBContainer,
@@ -12,12 +13,28 @@ import {
   MDBIcon,
 } from 'mdb-react-ui-kit';
 import "../Styles/ProfileCard.css";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons';
+import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons';
+import { faCheck } from '@fortawesome/free-solid-svg-icons';
+
 
 
 const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, commentsCount }) => {
   // Create a stars rating array based on the rating prop.
+  const [isFollowed, setIsFollowed] = useState(false);
+  const handleFollowClick = () => {
+    setIsFollowed(!isFollowed);
+  };
+
+
   const stars = Array.from({ length: 5 }, (_, index) => (
-    <MDBIcon key={index} fas icon={`star ${index < rating ? '' : '-o'} fa-xs`} />
+    <FontAwesomeIcon 
+      key={index} 
+      icon={index < rating ? fasFaStar : farFaStar} 
+      style={{ color: 'white' }} // Add the color style here
+
+    />
   ));
 
 
@@ -26,14 +43,14 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
     <>
       <MDBContainer>
         <MDBRow className="justify-content-center">
-          <MDBCol md="7" lg="6" xl="4" className="mt-5">
-            <MDBCard style={{ borderRadius: '15px', backgroundColor: '#2D3436' }}>
+          <MDBCol  className="mt-5">
+            <MDBCard style={{ borderRadius: '15px', backgroundColor: '#2D3436',height: '300px', width: '350px' }}>
               <MDBCardBody className="p-4 text-white">
                 <div>
                   <MDBTypography tag='h6'>{title}</MDBTypography>
                   <div className="d-flex align-items-center justify-content-between mb-3">
-                    <p className="small mb-0"><MDBIcon far icon="clock me-2" />{duration}</p>
-                    <p className="fw-bold mb-0">${price}</p>
+                    {/* <p className="small mb-0"><MDBIcon far icon="clock me-2" />{duration}</p>
+                    <p className="fw-bold mb-0">${price}</p> */}
                   </div>
                 </div>
                 <div className="d-flex align-items-center mb-4">
@@ -54,12 +71,20 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
                     </div>
                     <div>
                     <button
-                  className="btn btn-outline-light btn-sm"
-                 
-                  type="button"
-                >
-                  + Follow
-                </button>
+                    className={`btn btn-sm ${isFollowed ? 'btn-success' : 'btn-outline-light'}`}
+                    onClick={handleFollowClick}
+                    type="button"
+                  >
+                    {isFollowed ? (
+                      <>
+                      <FontAwesomeIcon icon={faCheck} />
+
+                        <FontAwesomeIcon icon="fa-solid fa-check" /> Followed
+                      </>
+                    ) : (
+                      "+ Follow"
+                    )}
+                  </button>
                 <button
                   className="btn btn-outline-light btn-sm mx-1"
           
