@@ -14,9 +14,8 @@ import {
 } from 'mdb-react-ui-kit';
 import "../Styles/ProfileCard.css";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faStar as fasFaStar } from '@fortawesome/free-solid-svg-icons';
 import { faStar as farFaStar } from '@fortawesome/free-regular-svg-icons';
-import { faCheck } from '@fortawesome/free-solid-svg-icons';
+import { faStar as fasFaStar, faStarHalfAlt, faCheck } from '@fortawesome/free-solid-svg-icons';
 
 
 
@@ -28,14 +27,19 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
   };
 
 
-  const stars = Array.from({ length: 5 }, (_, index) => (
-    <FontAwesomeIcon 
-      key={index} 
-      icon={index < rating ? fasFaStar : farFaStar} 
-      style={{ color: 'white' }} // Add the color style here
-
-    />
-  ));
+  const stars = [];
+  for (let i = 0; i < 5; i++) {
+    if (i < Math.floor(rating)) {
+      // Full star
+      stars.push(<FontAwesomeIcon key={i} icon={fasFaStar} style={{ color: 'white' }} />);
+    } else if (i === Math.floor(rating) && rating % 1 >= 0.5) {
+      // Half star
+      stars.push(<FontAwesomeIcon key={i} icon={faStarHalfAlt} style={{ color: 'white' }} />);
+    } else {
+      // Empty star
+      stars.push(<FontAwesomeIcon key={i} icon={farFaStar} style={{ color: 'white' }} />);
+    }
+  }
 
 
 
@@ -56,7 +60,7 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
                 <div className="d-flex align-items-center mb-4">
                   <div className="flex-shrink-0">
                     <MDBCardImage
-                      style={{ width: '70px' }}
+                      style={{ width: '70px', height: '70px', objectFit: 'cover' }}
                       className="img-fluid rounded-circle border border-dark border-3"
                       src={avatarUrl}
                       alt='Profile avatar'
