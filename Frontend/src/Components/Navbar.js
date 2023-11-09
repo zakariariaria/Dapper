@@ -2,10 +2,13 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"; // Step 1: Import motion
 import "../Styles/NavBar.css";
+import logoSVG from "../Images/LogoNavb.png";
 
 const Navbar = () => {
   const navigate = useNavigate();
-
+  function logoClick() {
+    navigate("/");
+  }
   function navLogin() {
     navigate("/login");
   }
@@ -29,15 +32,17 @@ const Navbar = () => {
 
   return (
     <div id="navbar_home">
-      <div className="logo_section">
-        <motion.a
-          href="/"
-          variants={hoverVariant}
+   <div className="logo_section">
+        {/* Replace "Dapper" with your SVG image */}
+        <motion.img
+          src={logoSVG}
+          alt="Logo"
           initial="initial"
           whileHover="hover"
-        >
-          Dapper
-        </motion.a>
+          style={{width:"60px", cursor:"pointer"}}
+          onClick={logoClick}
+          
+        />
       </div>
       <div className="navlinks_section">
         <motion.a 
