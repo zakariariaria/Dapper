@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import BrowseStylists from "./Forms/BrowseStylists";
 import ShoppingCart from "./Forms/ShoppingCart"
 import ProfilePage from "./Forms/ProfilePage"
+import About from "./Forms/About"
 
 
 
@@ -35,6 +36,7 @@ function App() {
         <Route path="/browse-stylist" element={<BrowseStylists/>}/>
         <Route path="/shopping-cart" element={<ShoppingCart/>}/>
         <Route path="/profile-page" element={<ProfilePage/>}/>
+        <Route path="/about" element={<About/>}/>
       </Routes>
     </div>
   );
