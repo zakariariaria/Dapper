@@ -36,3 +36,8 @@ services:
       MYSQL_PASSWORD: pscale_pw_tqg3yFejQGKphFa4aCb4aFXPHlaqlrdHYbCCQZ7Yy1Y
     container_name: database-docker
     restart: always
+
+    # host="db",  # This is the service name of your database in docker-compose
+    # user="1ctps9du2blghondeiey",
+    # password="pscale_pw_tqg3yFejQGKphFa4aCb4aFXPHlaqlrdHYbCCQZ7Yy1Y",
+    # database="dapper"
