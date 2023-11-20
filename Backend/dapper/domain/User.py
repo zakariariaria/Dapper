@@ -1,49 +1,26 @@
 from dataclasses import dataclass
 
 @dataclass
-class User():
-    def __init__(self, aName, aEmailAddress, aPassword):
-        self._password = None
-        self._emailAddress = None
-        self._name = None
-        self._name = aName
-        self._emailAddress = aEmailAddress
-        self._password = aPassword
+class User:
+    userId: int
+    name: str
+    emailAddress: str
+    password: str
 
-    def setName(self, aName):
-        wasSet = False
-        self._name = aName
-        wasSet = True
-        return wasSet
+    def set_user_id(self, aUserId: int):
+        self.userId = aUserId
 
-    def setEmailAddress(self, aEmailAddress):
-        wasSet = False
-        self._emailAddress = aEmailAddress
-        wasSet = True
-        return wasSet
+    def set_name(self, aName: str):
+        self.name = aName
 
-    def setPassword(self, aPassword):
-        wasSet = False
-        self._password = aPassword
-        wasSet = True
-        return wasSet
+    def set_email_address(self, aEmailAddress: str):
+        self.emailAddress = aEmailAddress
 
-    def getName(self):
-        return self._name
-
-    def getEmailAddress(self):
-        return self._emailAddress
-
-    def getPassword(self):
-        return self._password
+    def set_password(self, aPassword: str):
+        self.password = aPassword
 
     def delete(self):
-        pass
+        pass  # Add logic for delete if necessary
 
     def __str__(self):
-        return str(super().__str__()) + "[" + "name" + ":" + str(self.getName()) + "," + "emailAddress" + ":" + str(self.getEmailAddress()) + "," + "password" + ":" + str(self.getPassword()) + "]"
-
-
-
-
-
+        return f"User(userId={self.userId}, name={self.name}, emailAddress={self.emailAddress}, password={self.password})"
