@@ -33,7 +33,7 @@ const Navbar = () => {
   return (
     <div id="navbar_home">
    <div className="logo_section">
-        {/* Replace "Dapper" with your SVG image */}
+
         <motion.img
           src={logoSVG}
           alt="Logo"
