@@ -4,19 +4,15 @@
   align-items: center;
   font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
   background: linear-gradient(145deg, #1A1A19, #121414); /* Enhanced gradient for a deeper 3D look */
-  box-shadow: 8px 8px 16px #1A1A19, -8px -8px 16px #0a0a0a; /* More pronounced shadows for depth */
   color: white;
-  padding: 10px 20px;
-  border-top: 2px solid #242727; /* Darker top border for depth */
-  border-bottom: 2px solid #0a0a0a; /* Lighter bottom border for raised effect */
 }
 a {
   text-decoration: none !important;
-  color: white !important;
-  font-size: 18px;
+  font-size: 12px;
   white-space: nowrap;
   margin-right: 10px;
   margin-bottom: 5px;
+  margin-top: 5px;
   transition: color 0.3s ease;
 }
 
@@ -43,6 +39,7 @@ a:hover {
   display: flex;
   justify-content: center;
   gap: 2rem;
+ 
   flex-grow: 1;
 }
 
