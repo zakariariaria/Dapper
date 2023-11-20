@@ -1,12 +1,14 @@
 import mysql.connector
-from typing import Optional, List
-from domain.User import User
-from domain.repository.UserRepository import UserRepository
+from typing import List
 
-class UserNotFound(Exception):
-    pass
+class User:
+    def __init__(self, userId: int, name: str, emailAddress: str, password: str):
+        self.userId = userId
+        self.name = name
+        self.emailAddress = emailAddress
+        self.password = password
 
-class UserSQLRepository(UserRepository):
+class UserSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +16,36 @@ class UserSQLRepository(UserRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, user_emailAddress: str) -> User:
-        self.cursor.execute("SELECT * FROM user WHERE email_address = %s", (user_emailAddress,))
+    def get_by_id(self, userId: int) -> User:
+        self.cursor.execute("SELECT * FROM user WHERE userId = %s", (userId,))
         result = self.cursor.fetchone()
         if result:
-            return User(*result)
+            return User(**result)
         else:
-            raise UserNotFound()
+            raise ValueError(f"User with id {userId} not found")
 
-    def add(self, user: User) -> None:
-        self.cursor.execute("INSERT INTO user (name, email_address, password, user_id) VALUES (%s, %s, %s, %s)", 
-                            (user.name, user.email_address, user.password, user.user_id))
+    def add(self, name: str, emailAddress: str, password: str) -> None:
+        self.cursor.execute("INSERT INTO user (name, emailAddress, password) VALUES (%s, %s, %s)", 
+                            (name, emailAddress, password))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[User]:
-        query = "SELECT * FROM user"
-        if search:
-            query += " WHERE email_address LIKE %s OR name LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%', '%' + search + '%'))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[User]:
+        self.cursor.execute("SELECT * FROM user")
         results = self.cursor.fetchall()
-        return [User(*result) for result in results]
+        return [User(**result) for result in results]
+
+    def update(self, userId: int, **kwargs) -> None:
+        columns = ', '.join(f"{k} = %s" for k in kwargs)
+        values = list(kwargs.values())
+        values.append(userId)
+        self.cursor.execute(f"UPDATE user SET {columns} WHERE userId = %s", values)
+        self.conn.commit()
+
+    def delete(self, userId: int) -> None:
+        self.cursor.execute("DELETE FROM user WHERE userId = %s", (userId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()

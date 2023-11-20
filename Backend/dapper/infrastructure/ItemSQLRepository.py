@@ -1,12 +1,17 @@
 import mysql.connector
-from typing import Optional, List
-from domain.Item import Item
-from domain.repository.ItemRepository import ItemRepository
+from typing import List
 
-class ItemNotFound(Exception):
-    pass
+class Item:
+    def __init__(self, itemId: int, name: str, price: float, seasons: str, brand: str, imageURL: str, colorScheme: str):
+        self.itemId = itemId
+        self.name = name
+        self.price = price
+        self.seasons = seasons
+        self.brand = brand
+        self.imageURL = imageURL
+        self.colorScheme = colorScheme
 
-class ItemSQLRepository(ItemRepository):
+class ItemSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +19,36 @@ class ItemSQLRepository(ItemRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, item_id: int) -> Item:
-        self.cursor.execute("SELECT * FROM item WHERE item_id = %s", (item_id,))
+    def get_by_id(self, itemId: int) -> Item:
+        self.cursor.execute("SELECT * FROM item WHERE itemId = %s", (itemId,))
         result = self.cursor.fetchone()
         if result:
-            return Item(*result)
+            return Item(**result)
         else:
-            raise ItemNotFound()
+            raise ValueError(f"Item with id {itemId} not found")
 
-    def add(self, entry: Item) -> None:
-        self.cursor.execute("INSERT INTO item (size, price, color_scheme, brand, item_id, image_url) VALUES (%s, %s, %s, %s, %s, %s)", 
-                            (entry.size, entry.price, entry.color_scheme, entry.brand, entry.item_id, entry.image_url))
+    def add(self, name: str, price: float, seasons: str, brand: str, imageURL: str, colorScheme: str) -> None:
+        self.cursor.execute("INSERT INTO item (name, price, seasons, brand, imageURL, colorScheme) VALUES (%s, %s, %s, %s, %s, %s)", 
+                            (name, price, seasons, brand, imageURL, colorScheme))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[Item]:
-        query = "SELECT * FROM item"
-        if search:
-            query += " WHERE item_id LIKE %s OR size LIKE %s OR brand LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%', '%' + search + '%', '%' + search + '%'))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[Item]:
+        self.cursor.execute("SELECT * FROM item")
         results = self.cursor.fetchall()
-        return [Item(*result) for result in results]
+        return [Item(**result) for result in results]
+
+    def update(self, itemId: int, **kwargs) -> None:
+        columns = ', '.join(f"{k} = %s" for k in kwargs)
+        values = list(kwargs.values())
+        values.append(itemId)
+        self.cursor.execute(f"UPDATE item SET {columns} WHERE itemId = %s", values)
+        self.conn.commit()
+
+    def delete(self, itemId: int) -> None:
+        self.cursor.execute("DELETE FROM item WHERE itemId = %s", (itemId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()

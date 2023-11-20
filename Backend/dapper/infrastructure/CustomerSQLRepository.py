@@ -1,12 +1,12 @@
 import mysql.connector
-from typing import Optional, List
-from domain.Customer import Customer
-from domain.repository.CustomerRepository import CustomerRepository
+from typing import List, Optional
 
-class CustomerNotFound(Exception):
-    pass
+class Customer:
+    def __init__(self, customerId: int, addressId: Optional[int] = None):
+        self.customerId = customerId
+        self.addressId = addressId
 
-class CustomerSQLRepository(CustomerRepository):
+class CustomerSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +14,34 @@ class CustomerSQLRepository(CustomerRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, customer_id: int) -> Customer:
-        self.cursor.execute("SELECT * FROM customer WHERE subscription_price = %s", (customer_id,))
+    def get_by_id(self, customerId: int) -> Customer:
+        self.cursor.execute("SELECT * FROM customer WHERE customerId = %s", (customerId,))
         result = self.cursor.fetchone()
         if result:
-            return Customer(*result)
+            return Customer(**result)
         else:
-            raise CustomerNotFound()
+            raise ValueError(f"Customer with id {customerId} not found")
 
-    def add(self, entry: Customer) -> None:
-        self.cursor.execute("INSERT INTO customer VALUES (%s, %s, %s)", 
-                            (entry.subscription_price, entry.preference_size, entry.user_name))
+    def add(self, customerId: int, addressId: Optional[int] = None) -> None:
+        self.cursor.execute("INSERT INTO customer (customerId, addressId) VALUES (%s, %s)", 
+                            (customerId, addressId))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[Customer]:
-        query = "SELECT * FROM customer"
-        if search:
-            query += " WHERE subscription_price LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%',))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[Customer]:
+        self.cursor.execute("SELECT * FROM customer")
         results = self.cursor.fetchall()
-        return [Customer(*result) for result in results]
+        return [Customer(**result) for result in results]
+
+    def update(self, customerId: int, addressId: Optional[int] = None) -> None:
+        self.cursor.execute("UPDATE customer SET addressId = %s WHERE customerId = %s", 
+                            (addressId, customerId))
+        self.conn.commit()
+
+    def delete(self, customerId: int) -> None:
+        self.cursor.execute("DELETE FROM customer WHERE customerId = %s", (customerId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()

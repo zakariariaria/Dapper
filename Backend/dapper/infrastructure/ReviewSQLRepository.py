@@ -1,12 +1,16 @@
 import mysql.connector
-from typing import Optional, List
-from domain.Review import Review
-from domain.repository.ReviewRepository import ReviewRepository
+from typing import List
 
-class ReviewNotFound(Exception):
-    pass
+class Review:
+    def __init__(self, reviewId: int, customerId: int, stylistId: int, rating: int, comment: str, reviewDate: str):
+        self.reviewId = reviewId
+        self.customerId = customerId
+        self.stylistId = stylistId
+        self.rating = rating
+        self.comment = comment
+        self.reviewDate = reviewDate
 
-class ReviewSQLRepository(ReviewRepository):
+class ReviewSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +18,36 @@ class ReviewSQLRepository(ReviewRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, rating_id: int) -> Review:
-        self.cursor.execute("SELECT * FROM review WHERE rating_id = %s", (rating_id,))
+    def get_by_id(self, reviewId: int) -> Review:
+        self.cursor.execute("SELECT * FROM review WHERE reviewId = %s", (reviewId,))
         result = self.cursor.fetchone()
         if result:
-            return Review(*result)
+            return Review(**result)
         else:
-            raise ReviewNotFound()
+            raise ValueError(f"Review with id {reviewId} not found")
 
-    def add(self, entry: Review) -> None:
-        self.cursor.execute("INSERT INTO review (stylist_bio, rating, comment, rating_id) VALUES (%s, %s, %s, %s)", 
-                            (entry.stylist_bio, entry.rating, entry.comment, entry.rating_id))
+    def add(self, customerId: int, stylistId: int, rating: int, comment: str, reviewDate: str) -> None:
+        self.cursor.execute("INSERT INTO review (customerId, stylistId, rating, comment, reviewDate) VALUES (%s, %s, %s, %s, %s)", 
+                            (customerId, stylistId, rating, comment, reviewDate))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[Review]:
-        query = "SELECT * FROM review"
-        if search:
-            query += " WHERE rating_id LIKE %s OR comment LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%', '%' + search + '%'))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[Review]:
+        self.cursor.execute("SELECT * FROM review")
         results = self.cursor.fetchall()
-        return [Review(*result) for result in results]
+        return [Review(**result) for result in results]
+
+    def update(self, reviewId: int, **kwargs) -> None:
+        columns = ', '.join(f"{k} = %s" for k in kwargs)
+        values = list(kwargs.values())
+        values.append(reviewId)
+        self.cursor.execute(f"UPDATE review SET {columns} WHERE reviewId = %s", values)
+        self.conn.commit()
+
+    def delete(self, reviewId: int) -> None:
+        self.cursor.execute("DELETE FROM review WHERE reviewId = %s", (reviewId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()

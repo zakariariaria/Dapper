@@ -1,12 +1,15 @@
 import mysql.connector
-from typing import Optional, List
-from domain.Bill import Bill
-from domain.repository.BillRepository import BillRepository
+from typing import List
 
-class BillNotFound(Exception):
-    pass
+class Bill:
+    def __init__(self, billId, orderId, issueDate, dueDate, amount):
+        self.billId = billId
+        self.orderId = orderId
+        self.issueDate = issueDate
+        self.dueDate = dueDate
+        self.amount = amount
 
-class BillSQLRepository(BillRepository):
+class BillSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +17,36 @@ class BillSQLRepository(BillRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, bill_id: int) -> Bill:
-        self.cursor.execute("SELECT * FROM bill WHERE issue_date = %s", (bill_id,))
+    def get_by_id(self, billId: int) -> Bill:
+        self.cursor.execute("SELECT * FROM bill WHERE billId = %s", (billId,))
         result = self.cursor.fetchone()
         if result:
-            return Bill(*result)
+            return Bill(**result)
         else:
-            raise BillNotFound()
+            raise ValueError(f"Bill with id {billId} not found")
 
-    def add(self, entry: Bill) -> None:
-        self.cursor.execute("INSERT INTO bill VALUES (%s, %s, %s, %s)", 
-                            (entry.issue_date, entry.order_order_id, entry.due_date, entry.sum))
+    def add(self, orderId: int, issueDate: str, dueDate: str, amount: float) -> None:
+        self.cursor.execute("INSERT INTO bill (orderId, issueDate, dueDate, amount) VALUES (%s, %s, %s, %s)", 
+                            (orderId, issueDate, dueDate, amount))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[Bill]:
-        query = "SELECT * FROM bill"
-        if search:
-            query += " WHERE issue_date LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%',))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[Bill]:
+        self.cursor.execute("SELECT * FROM bill")
         results = self.cursor.fetchall()
-        return [Bill(*result) for result in results]
+        return [Bill(**result) for result in results]
+
+    def update(self, billId: int, **kwargs) -> None:
+        columns = ', '.join(f"{k} = %s" for k in kwargs)
+        values = list(kwargs.values())
+        values.append(billId)
+        self.cursor.execute(f"UPDATE bill SET {columns} WHERE billId = %s", values)
+        self.conn.commit()
+
+    def delete(self, billId: int) -> None:
+        self.cursor.execute("DELETE FROM bill WHERE billId = %s", (billId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()

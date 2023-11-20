@@ -1,12 +1,15 @@
 import mysql.connector
-from typing import Optional, List
-from domain.Order import Order
-from domain.repository.OrderRepository import OrderRepository
+from typing import List
 
-class OrderNotFound(Exception):
-    pass
+class Order:
+    def __init__(self, orderId: int, customerId: int, orderDate: str, deliveryDate: str, status: str):
+        self.orderId = orderId
+        self.customerId = customerId
+        self.orderDate = orderDate
+        self.deliveryDate = deliveryDate
+        self.status = status
 
-class OrderSQLRepository(OrderRepository):
+class OrderSQLRepository:
     def __init__(self, host: str, user: str, password: str, database: str):
         self.conn = mysql.connector.connect(
             host=host,
@@ -14,30 +17,36 @@ class OrderSQLRepository(OrderRepository):
             password=password,
             database=database
         )
-        self.cursor = self.conn.cursor()
+        self.cursor = self.conn.cursor(dictionary=True)
 
-    def get(self, order_id: int) -> Order:
-        self.cursor.execute("SELECT * FROM `order` WHERE order_id = %s", (order_id,))
+    def get_by_id(self, orderId: int) -> Order:
+        self.cursor.execute("SELECT * FROM `order` WHERE orderId = %s", (orderId,))
         result = self.cursor.fetchone()
         if result:
-            return Order(*result)
+            return Order(**result)
         else:
-            raise OrderNotFound()
+            raise ValueError(f"Order with id {orderId} not found")
 
-    def add(self, entry: Order) -> None:
-        self.cursor.execute("INSERT INTO `order` (customer_subscription_price, item_package_item_package_id, bill_issue_date, order_id, order_date, delivery_date, status) VALUES (%s, %s, %s, %s, %s, %s, %s)", 
-                            (entry.customer_subscription_price, entry.item_package_item_package_id, entry.bill_issue_date, entry.order_id, entry.order_date, entry.delivery_date, entry.status))
+    def add(self, customerId: int, orderDate: str, deliveryDate: str, status: str) -> None:
+        self.cursor.execute("INSERT INTO `order` (customerId, orderDate, deliveryDate, status) VALUES (%s, %s, %s, %s)", 
+                            (customerId, orderDate, deliveryDate, status))
         self.conn.commit()
 
-    def get_all(self, search: Optional[str] = None) -> List[Order]:
-        query = "SELECT * FROM `order`"
-        if search:
-            query += " WHERE order_id LIKE %s OR status LIKE %s"
-            self.cursor.execute(query, ('%' + search + '%', '%' + search + '%'))
-        else:
-            self.cursor.execute(query)
+    def get_all(self) -> List[Order]:
+        self.cursor.execute("SELECT * FROM `order`")
         results = self.cursor.fetchall()
-        return [Order(*result) for result in results]
+        return [Order(**result) for result in results]
+
+    def update(self, orderId: int, **kwargs) -> None:
+        columns = ', '.join(f"{k} = %s" for k in kwargs)
+        values = list(kwargs.values())
+        values.append(orderId)
+        self.cursor.execute(f"UPDATE `order` SET {columns} WHERE orderId = %s", values)
+        self.conn.commit()
+
+    def delete(self, orderId: int) -> None:
+        self.cursor.execute("DELETE FROM `order` WHERE orderId = %s", (orderId,))
+        self.conn.commit()
 
     def __del__(self):
         self.cursor.close()
