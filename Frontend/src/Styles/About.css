@@ -1,0 +1,61 @@
+@keyframes fadeIn {
+	from {
+	  opacity: 0;
+	  transform: translateY(-20px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+  }
+
+  @keyframes fadeInUp {
+	from {
+	  opacity: 0;
+	  transform: translateY(20px);
+	}
+	to {
+	  opacity: 1;
+	  transform: translateY(0);
+	}
+}
+
+.item-animation {
+	animation: fadeInUp 1s ease-out forwards;
+  }
+  
+  .about-header {
+	text-align: center;
+	background-color: #0e1111;
+	border-radius: 8px;
+	color: #f0f0f0;
+	animation: fadeIn 1s ease-out forwards; /* Apply the animation here */
+  }
+  
+  .about-header h2 {
+	font-size: 2.5rem;
+	font-weight: 600;
+	margin-bottom: 1rem;
+  }
+  
+  .about-header .highlight {
+	color: #e2c43f;
+	font-weight: 700;
+  }
+  
+  .about-instructions {
+	font-size: 1.2rem;
+	color: #cfd8dc;
+	margin-bottom: 0.5rem;
+  }
+  
+  .about-message {
+	font-size: 1rem;
+	color: #cfd8dc;
+	font-weight: 400;
+  }
+  
+  .about-message strong {
+	color: #ffffff;
+	font-weight: 600;
+  }

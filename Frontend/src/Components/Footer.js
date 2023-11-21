@@ -12,13 +12,12 @@ class Footer extends React.Component {
           gap: "5rem",
           padding: "5rem"
           }}>
-            <a style={{ color: "black",textDecoration: "none"}}>2023 Dapper. All rights reserved.</a>
-            <a href="#">Home</a>
-            <a href="#">Products/Services</a>
-            <a href="#">About</a>
-            <a href="#">Contact</a>
-            <a style={{ color: "black",textDecoration: "none"}}>Email : contact@example.com</a>
-            <a style={{ color: "black",textDecoration: "none"}}>Phone : 123-456-7890</a>
+            <a style={{ color: "white",textDecoration: "none"}}>2023 Dapper. All rights reserved.</a>
+            <a style={{ color: "white",textDecoration: "none", cursor:"pointer"}} href="#">Home</a>
+            <a  style={{ color: "white",textDecoration: "none", cursor:"pointer"}} href="#">Products/Services</a>
+            <a  style={{ color: "white",textDecoration: "none", cursor:"pointer"}} href="/about">About</a>
+            <a  style={{ color: "white",textDecoration: "none", cursor:"pointer"}} href="/about">Contact</a>
+            <a style={{ color: "white",textDecoration: "none"}}>support@dapper.com</a>
           </footer>
          
           
