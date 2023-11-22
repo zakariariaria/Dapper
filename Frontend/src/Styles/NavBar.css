@@ -1,14 +1,11 @@
 #navbar_home {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
   font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
-  background: linear-gradient(145deg, #1A1A19, #121414); /* Enhanced gradient for a deeper 3D look */
+  background: #1a1a19;
   color: white;
 }
 a {
   text-decoration: none !important;
-  font-size: 12px;
+  font-size: 14px;
   white-space: nowrap;
   margin-right: 10px;
   margin-bottom: 5px;
@@ -16,52 +13,10 @@ a {
   transition: color 0.3s ease;
 }
 
-/* Update the logo_section styles */
-.logo_section {
-  flex: 0 0 auto; /* Prevent the logo from growing with flex-grow */
-  margin-right: 10px; /* Add some margin to separate the logo from other content */
-}
-
-/* Adjust the logo size */
-.logo_section img {
-  max-width: 100%; /* Make the logo responsive and fit the available space */
-  height: auto; /* Maintain the aspect ratio of the logo */
-  /* You can also set specific width and height values to control the logo's size */
-}
-
-
-
-a:hover {
-  color: #007bff;
-}
-
 .navlinks_section {
   display: flex;
+  flex-direction: row;
   justify-content: center;
   gap: 2rem;
- 
   flex-grow: 1;
-}
-
-.buttons_section {
-  display: flex;
-}
-
-.buttons_section button {
-  background-color: white;
-  font-family: "Source Sans Pro", "Trebuchet MS", Helvetica, sans-serif;
-  white-space: nowrap;
-  color: #323232;
-  border: none;
-  padding: 10px 20px;
-  cursor: pointer;
-  margin-left: 10px;
-  border-radius: 25px; /* Unchanged rounded edges */
-  transition: background-color 0.3s ease, box-shadow 0.3s ease;
-}
-
-.buttons_section button:hover {
-  background-color: #050505;
-  color: white; /* Unchanged text color on hover */
-  box-shadow: 2px 2px 5px #050505, -2px -2px 5px #ffffff; /* Subtler shadow effect on hover */
 }

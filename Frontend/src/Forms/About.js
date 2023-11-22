@@ -5,11 +5,14 @@ import Footer from "../Components/Footer.js";
 import step1 from "../Images/STEP1_1.png";
 import step2 from "../Images/STEP2.png";
 import step3 from "../Images/STEP3.png";
-import delievry from "../Images/delivery.jpg";
+import { useNavigate } from "react-router-dom";
+
 
 import { motion } from "framer-motion";
 
 function About() {
+  const navigate = useNavigate();
+
   const btn = {
     display: "block",
     background: "#0e1111",
@@ -60,7 +63,7 @@ function About() {
       x: 0,
     },
     hover: {
-      x: 10,
+      x: -20,
       transition: {
         type: "tween",
         duration: 1.0,
@@ -73,7 +76,7 @@ function About() {
     <body>
       <NavBar></NavBar>
       <div
-        className="container "
+        className="container"
         id="top-container"
         style={{ marginTop: "1rem" }}
       >
@@ -88,12 +91,9 @@ function About() {
                 Sign up for Dapper and fill out a profile detailing your fashion
                 preferences, sizes, preferred colors, and subscription level.
               </p>
-              <p className="about-message">
-                Fancy something? <strong>Mark your favorites</strong> and the{" "}
-                <strong>total price</strong> will be ready for you.
-              </p>
+          
             </div>
-            <button className="btn btn-outline-primary" style={btn}>
+            <button className="btn btn-outline-primary" style={btn} onClick={()=>navigate("/register") }>
               Sign Up
             </button>
           </div>
@@ -148,6 +148,7 @@ function About() {
             whileHover="hover"
           />
         </div>
+      
       </div>
       <Footer></Footer>
     </body>

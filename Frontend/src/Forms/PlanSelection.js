@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import '../Styles/PlanSelection.css';
 import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
+import Footer from '../Components/Footer';
 
 
 function PlanSelection() {
@@ -52,6 +53,7 @@ function PlanSelection() {
     };
 
     return (
+        <>
         <div>
                <Navbar></Navbar>
                <Header></Header>
@@ -101,7 +103,10 @@ function PlanSelection() {
                     </div>
                 </div>
             </div>
+        
         </div>
+        
+           </>
     );
 }
 

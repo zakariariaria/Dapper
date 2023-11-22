@@ -1,6 +1,5 @@
 import React from "react";
 import "../Styles/Home.css";
-import placeholder from "../Images/placeholder-image.png";
 import Footer from "../Components/Footer";
 import Navbar from "../Components/Navbar";
 import sportswear from "../Images/SportWear.jpg";
@@ -11,12 +10,17 @@ import hanger from "../Images/hanger.jpg";
 import whitebox from "../Images/whitebox.jpg";
 import delievry from "../Images/delivery.jpg";
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 
 import { motion } from "framer-motion";
+import { Navigate } from "react-router-dom";
 
 function Home() {
   const [isHowItWorksInView, setIsHowItWorksInView] = useState(false);
   const [isSeeOurStylesInView, setIsSeeOurStylesInView] = useState(false);
+  const navigate = useNavigate();
+
 
   // const [isInView, setIsInView] = useState(false);
   const truckMotion = {
@@ -116,12 +120,10 @@ function Home() {
               <div className="wrapper_choices">
                 <img className="placeholder" src={hanger}></img>
                 <h3>Choose your clothes</h3>
-                <label>Curated outfits</label>
               </div>
               <div className="wrapper_choices">
                 <img className="placeholder" src={whitebox}></img>
                 <h3>Create the perfect box</h3>
-                <label>Curated outfits</label>
               </div>
               <div className="wrapper_choices">
                 <motion.img
@@ -130,11 +132,11 @@ function Home() {
                   variants={truckMotion}
                   initial="rest"
                   whileHover="hover"
-                />                <h3>Get convenient deliveries</h3>
-                <label>Curated outfits</label>
+                />             
+                <h3>Get convenient deliveries</h3>
               </div>
             </div>
-            <button className="plans_button_home">Learn more</button>
+            <button className="plans_button_home" onClick={()=> navigate("/about")}>Learn more</button>
           </motion.div>
           <motion.div
             className="wrapper_see_our_styles"
@@ -142,7 +144,8 @@ function Home() {
             animate={isSeeOurStylesInView ? "animate" : "initial"}
             variants={fadeIn}
           >
-            <h2>Your box, your way</h2>
+            <h2 className="yourBox-title">Your box, Your way</h2>
+
             <label>
               Flexible options to make you look dapper and customize your box
             </label>
@@ -202,7 +205,7 @@ function Home() {
                 <label>For the most formal of occasions</label>
               </div>
             </div>
-            <button className="plans_button_home">See our styles</button>
+            <button className="plans_button_home" onClick={()=> navigate("/plan-selection")}>See our styles</button>
           </motion.div>
         </div>
         <hr className="line_home"></hr>

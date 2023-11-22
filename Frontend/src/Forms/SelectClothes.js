@@ -10,6 +10,7 @@ import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
 import ProfileCard from "../Components/ProfileCard";
+import Footer from "../Components/Footer";
 
 const SelectClothes = () => {
   const styles = [
@@ -168,6 +169,7 @@ const SelectClothes = () => {
           
         </div>
       </div>
+      <Footer></Footer>
   
     </>
   );

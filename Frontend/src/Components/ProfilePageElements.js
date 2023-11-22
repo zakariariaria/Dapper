@@ -30,7 +30,7 @@ function ProfilePageElements({
 
   const photosToDisplay = showAllPhotos
     ? recentPhotos
-    : recentPhotos.slice(0, 3);
+    : recentPhotos.slice(0, 9);
 
   return (
     <div className="gradient-custom-2" style={{ backgroundColor: "#0e1111" }}>
@@ -40,15 +40,13 @@ function ProfilePageElements({
             <MDBCard>
               <div
                 className="rounded-top text-white d-flex flex-row"
-                style={{ backgroundColor: "#0e1111", height: "200px" }}
+                style={{ backgroundColor: "#0e1111", height: "200px", display:"flex", flexDirection:"row", justifyContent:"space-evenly",    alignItems: "center",
+              }}
               >
                 <div
-                  style={{
-                    display: "flex",
-                    flexDirection: "row",
-                    alignItems: "center",
-                  }}
-                >
+                    className="ms-3"
+                    style={{ display: "flex", flexDirection: "row", alignItems: "center"  }}
+                  >
                   <MDBCardImage
                     src={profileImageSrc}
                     alt="Generic placeholder image"
@@ -69,37 +67,11 @@ function ProfilePageElements({
                     <MDBTypography tag="h5">{name}</MDBTypography>
                     <MDBCardText>{location}</MDBCardText>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
-                    <div>
-                      <MDBCardText className="mb-1 h5">
-                        {photosCount}
-                      </MDBCardText>
-                      <MDBCardText className="small  mb-0">Photos</MDBCardText>
-                    </div>
-                    <div className="px-3">
-                      <MDBCardText className="mb-1 h5">
-                        {followersCount}
-                      </MDBCardText>
-                      <MDBCardText className="small  mb-0">
-                        Followers
-                      </MDBCardText>
-                    </div>
-                    <div>
-                      <MDBCardText className="mb-1 h5">
-                        {followingCount}
-                      </MDBCardText>
-                      <MDBCardText className="small  mb-0">
-                        Following
-                      </MDBCardText>
-                    </div>
                   </div>
-                </div>
-              </div>
-
-              <MDBCardBody className="text-white p-4">
-                <div className="mb-5">
-                  <p className="lead fw-normal mb-1">About</p>
-                  <div className="p-4">
+                  <div style={{ display: "flex", flexDirection: "row" }}>
+               
+              
+                  <div>
                     {about.map((item, index) => (
                       <MDBCardText key={index} className="font-italic mb-1">
                         {item}
@@ -107,6 +79,11 @@ function ProfilePageElements({
                     ))}
                   </div>
                 </div>
+             
+                </div>
+              
+              <MDBCardBody className="text-white p-4" style={{ backgroundColor: "#0e1111" }}>
+       
                 <div style={{ display: "flex", justifyContent: "flex-end" }}>
                   <button
                     onClick={toggleShowAllPhotos}

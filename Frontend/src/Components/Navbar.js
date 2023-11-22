@@ -2,9 +2,7 @@ import React from "react";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion"; // Step 1: Import motion
 import "../Styles/NavBar.css";
-import logoSVG from "../Images/LogoNavb.png";
-import videoMP4 from "../animation/logo-black-unscreen.gif"; // Import the video file
-
+import gif from "../animation/dapper_logo2.gif"; // Import the video file
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -34,11 +32,22 @@ const Navbar = () => {
 
   return (
     <div id="navbar_home">
-      <div className="navlinks_section">
-      {/* <div className="logo_section">
-      <img src={videoMP4} alt="Logo" className="logo-image" />
-</div> */}
+      <div className="logo_section">
+        <img
+          src={gif}
+          alt="Logo"
+          className="logo-image"
+          style={{
+            width: "95px",
+            height: "auto",
+            paddingLeft: "0.5rem",
+            cursor: "pointer",
+          }}
+          onClick={logoClick}
+        />
+      </div>
 
+      <div className="navlinks_section">
         <motion.a
           href="/about"
           variants={hoverVariant}
@@ -55,14 +64,7 @@ const Navbar = () => {
         >
           What we do
         </motion.a>
-        <motion.a
-          href="/about"
-          variants={hoverVariant}
-          initial="initial"
-          whileHover="hover"
-        >
-          Contact us
-        </motion.a>
+     
         <motion.div
           variants={hoverVariant}
           initial="initial"

@@ -2,16 +2,25 @@
 
 .loginPage-container{
     height: 100%;
-    background: url("../Images/background2.png");
+    background: url("../Images/background_gold.png");
     background-size: cover;
+
+}
+.loginPage-container-form{
+display: flex;
+flex-direction: column;
+justify-content: center;
+
+
 }
 .login-container {
     background-color: #2a2a2a;
     padding: 20px;
     border-radius: 10px;
     width: 300px;
-    margin: 50px auto;
+    margin: 50px ;
     box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    align-self: center;
 
 }
 
@@ -44,7 +53,7 @@ input {
 .login-button {
     width: 100%;
     padding: 10px;
-    background-color: #4a90e2;
+    background-color:  #d4af37;
     color: #fff;
     border: none;
     border-radius: 5px !important
@@ -54,7 +63,7 @@ input {
 }
 
 .login-button:hover {
-    background-color: #357ab7;
+    background-color: #887021;
 }
 
 .forgot-password {
