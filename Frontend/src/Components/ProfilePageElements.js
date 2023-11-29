@@ -68,16 +68,16 @@ function ProfilePageElements({
                     <MDBCardText>{location}</MDBCardText>
                   </div>
                   </div>
-                  <div style={{ display: "flex", flexDirection: "row" }}>
+                  <div style={{ display: "flex", flexDirection: "column" }}>
                
               
-                  <div>
+                  {/* <div >
                     {about.map((item, index) => (
                       <MDBCardText key={index} className="font-italic mb-1">
                         {item}
                       </MDBCardText>
                     ))}
-                  </div>
+                  </div> */}
                 </div>
              
                 </div>
