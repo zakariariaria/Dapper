@@ -27,13 +27,40 @@ function Login() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        if (validateEmail(email) && password.length >= 8) {
+    
+        // Validate email format
+        if (!validateEmail(email)) {
+            console.log('Invalid email format');
+            return;
+        }
+    
+        // Retrieve existing users
+        const existingUsers = JSON.parse(sessionStorage.getItem('tempUsers')) || [];
+    
+        // Check if the user exists
+        const userIndex = existingUsers.findIndex(user => user.email === email && user.password === password);
+        
+        if (userIndex !== -1) {
             console.log('Email:', email, 'Password:', password);
-            navigate("/"); 
+    
+            // Check if it's the user's first time logging in
+            if (existingUsers[userIndex].firstTime) {
+                existingUsers[userIndex].firstTime = false; // Update firstTime flag
+                existingUsers[userIndex].isActive = true;
+                sessionStorage.setItem('tempUsers', JSON.stringify(existingUsers)); // Save updated users array
+                navigate("/plan-selection"); // Navigate to plan selection
+            } else {
+                existingUsers[userIndex].isActive = true;
+                sessionStorage.setItem('tempUsers', JSON.stringify(existingUsers)); // Save updated users array
+                navigate("/"); // Navigate to home page
+            }
+            
+
         } else {
             console.log('Invalid email or password');
         }
     };
+    
 
    
     return (

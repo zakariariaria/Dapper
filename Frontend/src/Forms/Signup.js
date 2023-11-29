@@ -72,8 +72,9 @@ function Signup() {
         firstName,
         lastName,
         email,
-        password, // Be cautious with storing passwords
-        isActive: false
+        password,
+        isActive: false,
+        firstTime: true
     };
 
     // Retrieve the existing array of users or initialize it
