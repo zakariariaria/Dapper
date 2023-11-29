@@ -6,7 +6,55 @@ import ToastNotification from "../Components/ToastNotification";
 import { useNavigate } from "react-router-dom";
 
 const AccountSettings = () => {
-  // State to keep track of the active tab
+
+  const handleAddCardSubmit = (event) => {
+    event.preventDefault();
+  
+    const cardName = event.target.cardName.value.trim();
+    const cardNumber = event.target.cardNumber.value.trim();
+    const expDate = event.target.expDate.value.trim();
+    const cvv = event.target.cvv.value.trim();
+  
+    const isCardNumberValid = cardNumber.length === 16; 
+    const isExpDateValid = /^\d{4}-\d{2}$/.test(expDate); 
+    const isCvvValid = cvv.length === 3; 
+  
+    if (!isCardNumberValid || !isExpDateValid || !isCvvValid) {
+      return;
+    }
+  
+    
+    setCreditCard({
+      cardName,
+      cardNumber,
+      expDate,
+      cvv,
+    });
+  
+    let existingUsers = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
+    const activeUserIndex = existingUsers.findIndex((user) => user.isActive);
+  
+    if (activeUserIndex !== -1) {
+      existingUsers[activeUserIndex].creditCardInfo = {
+        cardholderName: cardName,
+        cardNumber: cardNumber,
+        expirationDate: expDate,
+        cvv: cvv,
+      };
+      sessionStorage.setItem("tempUsers", JSON.stringify(existingUsers));
+    }
+  
+    // Hide the add card form
+    setShowAddCard(false);
+  };
+  const [showAddCard, setShowAddCard] = useState(false);
+
+  const [creditCard, setCreditCard] = useState({
+    cardName: "",
+    cardNumber: "",
+    expDate: "",
+    cvv: "",
+  });
   const [activeTab, setActiveTab] = useState("account-general");
   const [showToast, setShowToast] = useState(false);
   const [isNameEditable, setIsNameEditable] = useState(false);
@@ -23,7 +71,21 @@ const handleRepeatNewPasswordChange = (e) => {
   setRepeatNewPassword(e.target.value);
 };
 
+const handleDeleteCard = () => {
+  setCreditCard({
+    cardName: "",
+    cardNumber: "",
+    expDate: "",
+    cvv: "",
+  });
 
+  let existingUsers = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
+  const activeUserIndex = existingUsers.findIndex((user) => user.isActive);
+  if (activeUserIndex !== -1) {
+    existingUsers[activeUserIndex].creditCardInfo = {};
+    sessionStorage.setItem("tempUsers", JSON.stringify(existingUsers));
+  }
+};
 
   const handleResendConfirmation = () => {
     setShowToast(true); // To show the toast notification
@@ -35,24 +97,32 @@ const handleRepeatNewPasswordChange = (e) => {
     email: "",
     password: "",
   });
+  
 
   useEffect(() => {
-    // Retrieve existing users
     const existingUsers = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
-    // Find the active user
     const activeUser = existingUsers.find((user) => user.isActive);
-
+  
     if (activeUser) {
-      // Set the initial data for the input fields
       setUserData({
         firstName: activeUser.firstName || "",
         lastName: activeUser.lastName || "",
         email: activeUser.email || "",
         password: activeUser.password || "",
       });
+
+      if (activeUser.creditCardInfo) {
+        setCreditCard({
+          cardName: activeUser.creditCardInfo.cardholderName || "",
+          cardNumber: activeUser.creditCardInfo.cardNumber || "",
+          expDate: activeUser.creditCardInfo.expirationDate || "",
+          cvv: activeUser.creditCardInfo.cvv || "",
+        });
+      }
     }
-    console.log(activeUser);
   }, []);
+
+  
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
@@ -61,8 +131,18 @@ const handleRepeatNewPasswordChange = (e) => {
       [name]: value,
     }));
   };
+
+  const handleCreditCardChange = (e) => {
+    const { name, value } = e.target;
+    setCreditCard((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+
   const handleSaveChanges = () => {
-    if (newPassword !== repeatNewPassword) {
+    // Check if new password and repeat password match
+    if (newPassword && newPassword !== repeatNewPassword) {
       setPasswordError("Passwords do not match");
       return;
     }
@@ -71,28 +151,39 @@ const handleRepeatNewPasswordChange = (e) => {
     const activeUserIndex = existingUsers.findIndex((user) => user.isActive);
   
     if (activeUserIndex !== -1) {
-      if (newPassword) {
-        setUserData((prevState) => ({
-          ...prevState,
-          password: newPassword
-        }));
+      // Update the active user's data with the current state
+      existingUsers[activeUserIndex] = {
+        ...existingUsers[activeUserIndex],
+        firstName: userData.firstName,
+        lastName: userData.lastName,
+        email: userData.email,
+        // Update password only if a new one has been entered
+        password: newPassword ? newPassword : existingUsers[activeUserIndex].password,
+        // Update credit card data
+        creditCardInfo: {
+          cardholderName: creditCard.cardName,
+          cardNumber: creditCard.cardNumber,
+          expirationDate: creditCard.expDate,
+          cvv: creditCard.cvv,
+        },
+      };
   
-        existingUsers[activeUserIndex] = {
-          ...existingUsers[activeUserIndex],
-          password: newPassword
-        };
+      // Save the updated users back to sessionStorage
+      sessionStorage.setItem("tempUsers", JSON.stringify(existingUsers));
   
-        sessionStorage.setItem("tempUsers", JSON.stringify(existingUsers));
+      // Clear the new password fields after successful update and reset the edit states
+      setNewPassword("");
+      setRepeatNewPassword("");
+      setPasswordError("");
+      setIsNameEditable(false);
+      setIsEmailEditable(false);
   
-        // Clear the password fields after successful update
-        setNewPassword("");
-        setRepeatNewPassword("");
-        setPasswordError("");
-        console.log(existingUsers[activeUserIndex]);
-
-      }
+      // Optionally, reload the page to reflect changes
+      window.location.reload();
     }
   };
+  
+  
   
   
 
@@ -144,12 +235,17 @@ const handleRepeatNewPasswordChange = (e) => {
   // Function to determine if a tab is active
   const isTabActive = (tabName) => activeTab === tabName;
 
-  const Input = (props) => (
+  const Input = ({ label, type, name, value, onChange, imgSrc }) => (
     <div className="input">
-      <label>{props.label}</label>
+      <label>{label}</label>
       <div className="input-field">
-        <input type={props.type} name={props.name} />
-        <img src={props.imgSrc} />
+        <input 
+          type={type} 
+          name={name} 
+          value={value} 
+          onChange={onChange} 
+        />
+        {imgSrc && <img src={imgSrc} alt="Input field icon" />}
       </div>
     </div>
   );
@@ -375,35 +471,67 @@ const handleRepeatNewPasswordChange = (e) => {
                   </div>
                 </div>
 
-                <div
-                  className={`tab-pane fade ${
-                    isTabActive("credit-card-info") ? "active show" : ""
-                  }`}
-                  id="credit-card-info"
-                >
-                  <div className="checkout-container">
-                    <Input label="Cardholder's Name" type="text" name="name" />
-                    <Input
-                      label="Card Number"
-                      type="number"
-                      name="card_number"
-                      imgSrc="https://seeklogo.com/images/V/visa-logo-6F4057663D-seeklogo.com.png"
-                    />
-                    <div className="row">
-                      <div className="col">
-                        <Input
-                          label="Expiration Date"
-                          type="month"
-                          name="exp_date"
-                        />
-                      </div>
-                      <div className="col">
-                        <Input label="CVV" type="number" name="cvv" />
-                      </div>
-                    </div>
-                    <Button text="Add Credit Card" />
-                  </div>
-                </div>
+              
+                <div className={`tab-pane fade ${isTabActive("credit-card-info") ? "active show" : ""}`} id="credit-card-info">
+        {!showAddCard ? (
+          <div>
+            <h5>Credit Card Information:</h5>
+            <p>Cardholder's Name: {creditCard.cardName}</p>
+            <p>Card Number: {creditCard.cardNumber}</p>
+            <p>Expiration Date: {creditCard.expDate}</p>
+            <p>CVV: {creditCard.cvv}</p>
+            <button className="btn btn-danger" onClick={handleDeleteCard}>Delete Card</button>
+            <button className="btn btn-primary" onClick={() => setShowAddCard(true)}>Add New Card</button>
+          </div>
+        ) : (
+          <form onSubmit={handleAddCardSubmit} className="checkout-container">
+            <div className="input">
+              <label>Cardholder's Name</label>
+              <input 
+                type="text" 
+                name="cardName" 
+                value={creditCard.cardName}
+                onChange={handleCreditCardChange}
+                required 
+              />
+            </div>
+            <div className="input">
+              <label>Card Number</label>
+              <input 
+                type="text" 
+                name="cardNumber" 
+                value={creditCard.cardNumber}
+                onChange={handleCreditCardChange}
+                required 
+              />
+            </div>
+            <div className="input">
+              <label>Expiration Date</label>
+              <input 
+                type="month" 
+                name="expDate" 
+                value={creditCard.expDate}
+                onChange={handleCreditCardChange}
+                required 
+              />
+            </div>
+            <div className="input">
+              <label>CVV</label>
+              <input 
+                type="text" 
+                name="cvv" 
+                value={creditCard.cvv}
+                onChange={handleCreditCardChange}
+                required 
+              />
+            </div>
+            <button type="submit" className="btn btn-success">Save Card</button>
+            <button type="button" className="btn btn-secondary" onClick={() => setShowAddCard(false)}>Cancel</button>
+          </form>
+        )}
+      </div>
+
+
               </div>
             </div>
           </div>
