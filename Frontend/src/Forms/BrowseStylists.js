@@ -3,6 +3,10 @@ import Navbar from '../Components/Navbar';
 import ProfileCard from '../Components/ProfileCard';
 import "../Styles/BrowseStylists.css";
 import { MDBRow, MDBContainer, MDBCol, MDBBtn} from 'mdb-react-ui-kit';
+import Logo_1 from '../Images/1_of_1.png' 
+import fa_clothing from '../Images/fa_clothing.png'
+
+
 
 
 // Dummy data array for stylist services
@@ -10,23 +14,21 @@ const stylistData = [
   // Each object is a unique stylist profile
   {
     id: 1,
-    title: 'Urban Streetwear Styling',
-    duration: '2 hrs',
-    price: 120,
-    username: '@urbanista',
-    avatarUrl: 'https://images.unsplash.com/photo-1628157588553-5eeea00af15c?q=80&w=2960&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
-    rating: 3.8,
-    commentsCount: '67',
+    title: '1 of 1 Apparel',
+    username: '@1_of_1_apparel',
+    avatarUrl: Logo_1,
+    rating: 5,
+    commentsCount: '100',
+    siteUrl: 'https://www.instagram.com/1_of_1_apparel/'
   },
   {
     id: 2,
-    title: 'Classic Bridal Look',
-    duration: '4 hrs',
-    price: 300,
-    username: '@classicbride',
-    avatarUrl: 'https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-2.webp',
-    rating: 4.9,
+    title: 'fa clothing',
+    username: '@faclothingca',
+    avatarUrl: fa_clothing,
+    rating: 5,
     commentsCount: '85',
+    siteUrl: 'https://www.instagram.com/faclothingca'
   },
   {
     id: 3,
@@ -155,6 +157,8 @@ const stylistData = [
 
 
 const BrowseStylists = () => {
+
+  
   const [currentPage, setCurrentPage] = useState(1);
   const [profilesPerPage] = useState(9);
 

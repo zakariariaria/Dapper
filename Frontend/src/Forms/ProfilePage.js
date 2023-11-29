@@ -1,12 +1,16 @@
 import React from 'react';
 import ProfilePageElements from '../Components/ProfilePageElements';
 import Navbar from '../Components/Navbar';
+import { useLocation } from 'react-router-dom';
+
 
 const ProfilePage = () => {
+  const location = useLocation();
+  const { title, username, avatarUrl, rating, commentsCount, siteUrl } = location.state || {};
+
   // Example props for the ProfilePageElements component
   const profileData = {
-    name: 'John Doe',
-    location: 'Los Angeles',
+    name: {username},
     photosCount: 350,
     followersCount: 1200,
     followingCount: 500,
@@ -36,14 +40,14 @@ const ProfilePage = () => {
     <>
       <Navbar />
       <ProfilePageElements
-        name={profileData.name}
+        name={username}
         location={profileData.location}
         photosCount={profileData.photosCount}
         followersCount={profileData.followersCount}
         followingCount={profileData.followingCount}
         about={profileData.about}
         recentPhotos={profileData.recentPhotos}
-        profileImageSrc={profileData.profileImageSrc} 
+        profileImageSrc={avatarUrl} 
       />
     </>
   );

@@ -9,10 +9,14 @@ import ProfessionalWomen from "../Images/ProfessionalWomen.jpg";
 import Header from "../Components/Header";
 import Navbar from "../Components/Navbar";
 import Dropdown from "react-bootstrap/Dropdown";
-import ProfileCard from "../Components/ProfileCard";
 import Footer from "../Components/Footer";
+import { useNavigate } from 'react-router-dom';
+
 
 const SelectClothes = () => {
+  const navigate = useNavigate();
+  
+
   const styles = [
     { name: "Street Wear", images: [streetWearMen, streetWearWomen] },
     { name: "Casual Wear", images: [CasualMen, CasualWomen] },
@@ -43,12 +47,33 @@ const SelectClothes = () => {
     setActiveStyleIndex((prevIndex) => (prevIndex + 1) % styles.length);
   };
 
+
   const prevStyle = () => {
     setActiveStyleIndex(
       (prevIndex) => (prevIndex - 1 + styles.length) % styles.length
     );
   };
 
+  const updateActiveUserChoices = () => {
+    // Retrieve the existing users
+    const users = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
+    const activeIndex = users.findIndex((user) => user.isActive);
+
+    if (activeIndex !== -1) {
+      // Update the active user's choices
+      users[activeIndex].clothingChoices = {
+        style: styles[activeStyleIndex].name,
+        size: selectedSize,
+        color: selectedColor,
+        gender: selectedGender,
+      };
+
+      // Save the updated users array back to session storage
+      sessionStorage.setItem("tempUsers", JSON.stringify(users));
+
+      navigate("/browse-stylist")
+    }
+  };
   return (
     <>
       <Navbar />
@@ -162,15 +187,13 @@ const SelectClothes = () => {
           <button
             className="carousel-finish-button"
             disabled={!(selectedSize && selectedColor && selectedGender)}
+            onClick={updateActiveUserChoices}
           >
             Continue
           </button>
-
-          
         </div>
       </div>
       <Footer></Footer>
-  
     </>
   );
 };

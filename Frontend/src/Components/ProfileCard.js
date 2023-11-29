@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
+
 
 import {
   MDBCol,
@@ -19,7 +21,16 @@ import { faStar as fasFaStar, faStarHalfAlt, faCheck } from '@fortawesome/free-s
 
 
 
-const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, commentsCount }) => {
+const ProfileCard = ({ title, username, avatarUrl, rating, commentsCount, siteUrl }) => {
+
+  const navigate = useNavigate();
+
+  const handleSeeMoreClick = () => {
+    navigate('/profile-page', { state: { title, username, avatarUrl, rating, commentsCount, siteUrl } });
+  };
+   
+
+
   // Create a stars rating array based on the rating prop.
   const [isFollowed, setIsFollowed] = useState(false);
   const handleFollowClick = () => {
@@ -91,7 +102,7 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
                   </button>
                 <button
                   className="btn btn-outline-light btn-sm mx-1"
-          
+                  onClick={() => window.open(siteUrl, '_blank')}
                   type="button"
                 >
                   Visit Website
@@ -105,8 +116,9 @@ const ProfileCard = ({ title, duration, price, username, avatarUrl, rating, comm
                       <button
                   className="btn btn-outline-light btn-sm"
                   type="button"
+                  onClick={handleSeeMoreClick}
               >
-                Contact Stylist
+                See More
               </button>
               </MDBCardBody>
             </MDBCard>
