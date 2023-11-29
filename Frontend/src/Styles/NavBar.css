@@ -17,6 +17,16 @@ a {
   transition: color 0.3s ease;
 }
 
+
+.user_nav {
+  text-decoration: none !important;
+  font-size: 14px;
+  white-space: nowrap;
+  margin-right: 10px;
+  margin-bottom: 5px;
+  margin-top: 5px;
+  transition: color 0.3s ease;
+}
 .navlinks_section {
   display: flex;
   flex-direction: row;

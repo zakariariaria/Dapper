@@ -89,7 +89,7 @@ const Navbar = () => {
           What we do
         </motion.a>
       </div>
-      <div style={{alignSelf:'flex-end',marginRight:'6rem',justifyContent: 'center' }}>
+      <div style={{alignSelf:'flex-end',marginRight:'6rem' }} className="user_nav">
       <motion.div
           variants={hoverVariant}
           initial="initial"
