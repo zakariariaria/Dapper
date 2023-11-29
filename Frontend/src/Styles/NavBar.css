@@ -35,3 +35,12 @@ a {
   flex-grow: 1;
 
 }
+
+.arrow-icon {
+  transition: transform 0.3s ease-in-out;
+}
+
+.arrow-rotated {
+  transform: rotate(-180deg);
+}
+
