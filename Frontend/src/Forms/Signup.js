@@ -9,7 +9,7 @@ import Navbar from "../Components/Navbar";
 function Signup() {
 
     const navigate = useNavigate();
-    function handleClick(){
+    function navLogin(){
         navigate("/login")
     }
 
@@ -22,11 +22,41 @@ function Signup() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [errorMessage, setErrorMessage] = useState('');  // New state for error messages
+    const [errorMessage, setErrorMessage] = useState('');  
+    const [emailErrorMessage, setEmailErrorMessage] = useState('');
+
     const handleConfirmPasswordChange = (e) => {
         // Whenever the confirm password input is changed, clear the error message
         setErrorMessage('');
         setConfirmPassword(e.target.value);
+    };
+    const handleEmailChange = (e) => {
+        setEmailErrorMessage('');
+        setEmail(e.target.value);
+    };
+    
+    
+
+
+    const validateEmail = (email) => {
+        // Regex for email validation
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    
+        // Check email format
+        if (!re.test(email)) {
+            return { isValid: false, message: "Invalid email format" };
+        }
+    
+        // Retrieve existing users
+        const existingUsers = JSON.parse(sessionStorage.getItem('tempUsers')) || [];
+    
+        // Check if the email is already used
+        const isEmailUsed = existingUsers.some(user => user.email === email);
+        if (isEmailUsed) {
+            return { isValid: false, message: "Email already in use" };
+        }
+    
+        return { isValid: true, message: "" };
     };
     
 
@@ -37,8 +67,36 @@ function Signup() {
             setErrorMessage('Passwords do not match!');
             return;
         }
-        // console.log('First Name:', firstName, 'Last Name:', lastName, 'Email:', email, 'Password:', password, 'Confirm Password:', confirmPassword);
+      // Create a new user object
+      const newUser = {
+        firstName,
+        lastName,
+        email,
+        password, // Be cautious with storing passwords
+        isActive: false
     };
+
+    // Retrieve the existing array of users or initialize it
+    const existingUsers = JSON.parse(sessionStorage.getItem('tempUsers')) || [];
+    const emailValidation = validateEmail(email);
+    if (!emailValidation.isValid) {
+        setEmailErrorMessage(emailValidation.message);
+        return;
+    }
+
+
+    existingUsers.forEach(user => user.isActive = false);
+
+
+    existingUsers.push(newUser);
+
+    sessionStorage.setItem('tempUsers', JSON.stringify(existingUsers));
+    console.log(newUser)
+    console.log(existingUsers)
+
+    // Navigate to the next page
+    navLogin();
+};
 
     return (
        <div className='page-signUp-container'>
@@ -69,12 +127,14 @@ function Signup() {
                     <div className="input-container">
                         <label>Email</label>
                         <input
-                            type="email"
-                            value={email}
-                            onChange={(e) => setEmail(e.target.value)}
-                            required
-                        />
-                    </div>
+                        type="email"
+                        value={email}
+                        onChange={handleEmailChange}
+                        required
+                        className={emailErrorMessage ? 'error-input' : ''}
+                    />
+                    {emailErrorMessage && <p className="error-message">{emailErrorMessage}</p>}
+                </div>
                     <div className="input-container">
                         <label>Password</label>
                         <input
@@ -100,7 +160,7 @@ function Signup() {
                  
                 </form>
                 <div className="login-section">
-                   Already have an account ? <a onClick={handleClick}>Log in</a>
+                   Already have an account ? <a onClick={navLogin}>Log in</a>
                 </div>
             </div>
             </div>

@@ -20,10 +20,19 @@ function Login() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const validateEmail = (email) => {
+        const re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return re.test(email);
+    };
+
     const handleSubmit = (e) => {
         e.preventDefault();
-        // Handle the login logic here
-        console.log('Email:', email, 'Password:', password);
+        if (validateEmail(email) && password.length >= 8) {
+            console.log('Email:', email, 'Password:', password);
+            navigate("/"); 
+        } else {
+            console.log('Invalid email or password');
+        }
     };
 
    
