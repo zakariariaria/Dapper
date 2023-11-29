@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../Styles/AccountSettings.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import Navbar from "../Components/Navbar";
 import ToastNotification from "../Components/ToastNotification";
+import { useNavigate } from "react-router-dom";
 
 const AccountSettings = () => {
   // State to keep track of the active tab
@@ -10,9 +11,107 @@ const AccountSettings = () => {
   const [showToast, setShowToast] = useState(false);
   const [isNameEditable, setIsNameEditable] = useState(false);
   const [isEmailEditable, setIsEmailEditable] = useState(false);
+  const navigate = useNavigate();
+  const [newPassword, setNewPassword] = useState("");
+  const handleNewPasswordChange = (e) => {
+    setNewPassword(e.target.value);
+  };
+  const [repeatNewPassword, setRepeatNewPassword] = useState("");
+const [passwordError, setPasswordError] = useState("");
+
+const handleRepeatNewPasswordChange = (e) => {
+  setRepeatNewPassword(e.target.value);
+};
+
+
+
   const handleResendConfirmation = () => {
     setShowToast(true); // To show the toast notification
   };
+
+  const [userData, setUserData] = useState({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+  });
+
+  useEffect(() => {
+    // Retrieve existing users
+    const existingUsers = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
+    // Find the active user
+    const activeUser = existingUsers.find((user) => user.isActive);
+
+    if (activeUser) {
+      // Set the initial data for the input fields
+      setUserData({
+        firstName: activeUser.firstName || "",
+        lastName: activeUser.lastName || "",
+        email: activeUser.email || "",
+        password: activeUser.password || "",
+      });
+    }
+    console.log(activeUser);
+  }, []);
+
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+    setUserData((prevState) => ({
+      ...prevState,
+      [name]: value,
+    }));
+  };
+  const handleSaveChanges = () => {
+    if (newPassword !== repeatNewPassword) {
+      setPasswordError("Passwords do not match");
+      return;
+    }
+  
+    let existingUsers = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
+    const activeUserIndex = existingUsers.findIndex((user) => user.isActive);
+  
+    if (activeUserIndex !== -1) {
+      if (newPassword) {
+        setUserData((prevState) => ({
+          ...prevState,
+          password: newPassword
+        }));
+  
+        existingUsers[activeUserIndex] = {
+          ...existingUsers[activeUserIndex],
+          password: newPassword
+        };
+  
+        sessionStorage.setItem("tempUsers", JSON.stringify(existingUsers));
+  
+        // Clear the password fields after successful update
+        setNewPassword("");
+        setRepeatNewPassword("");
+        setPasswordError("");
+        console.log(existingUsers[activeUserIndex]);
+
+      }
+    }
+  };
+  
+  
+
+  const show_icon = (
+    <>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        width="16"
+        height="16"
+        fill="currentColor"
+        class="bi bi-eye"
+        viewBox="0 0 16 16"
+      >
+        <path d="M16 8s-3-5.5-8-5.5S0 8 0 8s3 5.5 8 5.5S16 8 16 8M1.173 8a13.133 13.133 0 0 1 1.66-2.043C4.12 4.668 5.88 3.5 8 3.5c2.12 0 3.879 1.168 5.168 2.457A13.133 13.133 0 0 1 14.828 8c-.058.087-.122.183-.195.288-.335.48-.83 1.12-1.465 1.755C11.879 11.332 10.119 12.5 8 12.5c-2.12 0-3.879-1.168-5.168-2.457A13.134 13.134 0 0 1 1.172 8z" />
+        <path d="M8 5.5a2.5 2.5 0 1 0 0 5 2.5 2.5 0 0 0 0-5M4.5 8a3.5 3.5 0 1 1 7 0 3.5 3.5 0 0 1-7 0" />
+      </svg>
+    </>
+  );
+
   const edit_icon = (
     <>
       <svg
@@ -31,7 +130,13 @@ const AccountSettings = () => {
       </svg>
     </>
   );
-  // Function to handle tab click
+
+  const [showPassword, setShowPassword] = useState(false); // Add state for showing/hiding password
+
+  // Function to toggle showing/hiding the password
+  const toggleShowPassword = () => {
+    setShowPassword(!showPassword);
+  };
   const handleTabClick = (newActiveTab) => {
     setActiveTab(newActiveTab);
   };
@@ -87,14 +192,7 @@ const AccountSettings = () => {
                 >
                   Change password
                 </a>
-                <a
-                  className={`list-group-item list-group-item-action ${
-                    isTabActive("notifications") ? "active" : ""
-                  }`}
-                  onClick={() => handleTabClick("notifications")}
-                >
-                  Notifications
-                </a>
+
                 <a
                   className={`list-group-item list-group-item-action ${
                     isTabActive("credit-card-info") ? "active" : ""
@@ -116,19 +214,58 @@ const AccountSettings = () => {
                   <div className="card-body">
                     <div
                       className="form-group-edit"
-                      style={{ display: "flex", flexDirection: "row", marginBottom:"1rem"}}
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        marginBottom: "1rem",
+                      }}
                     >
                       <div className="form-group" style={{ width: "50%" }}>
-                        <label className="form-label">Name</label>
-                        <input type="text" className="form-control" disabled={!isNameEditable} />
+                        <label className="form-label"> First Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="firstName"
+                          value={userData.firstName}
+                          onChange={handleInputChange}
+                          disabled={!isNameEditable}
+                        />
                       </div>
                       <button
                         type="button"
                         className="btn btn-link btn-xsm"
-                        style={{fontSize:"12px"}}
+                        style={{ fontSize: "12px" }}
                         onClick={() => setIsNameEditable(true)}
                       >
-                        {edit_icon} Edit Name
+                        {edit_icon} Edit
+                      </button>
+                    </div>
+                    <div
+                      className="form-group-edit"
+                      style={{
+                        display: "flex",
+                        flexDirection: "row",
+                        marginBottom: "1rem",
+                      }}
+                    >
+                      <div className="form-group" style={{ width: "50%" }}>
+                        <label className="form-label">Last Name</label>
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="lastName"
+                          onChange={handleInputChange}
+                          value={userData.lastName}
+                          disabled={!isNameEditable}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-link btn-xsm"
+                        style={{ fontSize: "12px" }}
+                        onClick={() => setIsNameEditable(true)}
+                      >
+                        {edit_icon} Edit
                       </button>
                     </div>
                     <div
@@ -137,26 +274,52 @@ const AccountSettings = () => {
                     >
                       <div className="form-group" style={{ width: "50%" }}>
                         <label className="form-label">Email</label>
-                        <input type="text" className="form-control" disabled={!isEmailEditable} />
+                        <input
+                          type="text"
+                          className="form-control"
+                          name="email"
+                          value={userData.email}
+                          onChange={handleInputChange}
+                          disabled={!isEmailEditable}
+                        />
                       </div>
                       <button
                         type="button"
                         className="btn btn-link btn-xsm"
-                        style={{fontSize:"12px"}}
+                        style={{ fontSize: "12px" }}
                         onClick={() => setIsEmailEditable(true)}
-
                       >
-                        {edit_icon} Edit Email
+                        {edit_icon} Edit
                       </button>
                     </div>
-                    <button
+                    <div
+                      style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "1rem",
+                      }}
+                    >
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <button
                           type="button"
                           onClick={handleResendConfirmation}
-                          class="btn btn-dark btn-sm"
-                          style={{marginTop:"1rem"}}
+                          className="btn btn-dark btn-sm"
+                          style={{ whiteSpace: "nowrap", marginTop: "1rem" }}
                         >
                           Resend confirmation
                         </button>
+                      </div>
+                      <div style={{ display: "flex", flexDirection: "row" }}>
+                        <button
+                          type="button"
+                          onClick={() => navigate("/plan-selection")}
+                          className="btn btn-dark btn-sm"
+                          style={{ whiteSpace: "nowrap" }}
+                        >
+                          Manage Plan
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 <div
@@ -168,104 +331,50 @@ const AccountSettings = () => {
                   <div className="card-body pb-2">
                     <div className="form-group" style={{ width: "50%" }}>
                       <label className="form-label">Current password</label>
-                      <input type="password" className="form-control" />
+                      <div
+                        className="input-group"
+                        style={{ display: "flex", flexDirection: "row" }}
+                      >
+                        <input
+                          type={showPassword ? "text" : "password"}
+                          className="form-control"
+                          name="password"
+                          value={userData.password}
+                          onChange={handleInputChange}
+                        />
+                      </div>
+                      <button
+                        type="button"
+                        className="btn btn-link btn-xsm"
+                        style={{ fontSize: "12px" }}
+                        onClick={toggleShowPassword}
+                      >
+                        {show_icon} Show
+                      </button>
                     </div>
                     <div className="form-group" style={{ width: "50%" }}>
                       <label className="form-label">New password</label>
-                      <input type="password" className="form-control" />
-                    </div>
+                      <input
+  type="password"
+  className="form-control"
+  value={newPassword}
+  onChange={handleNewPasswordChange}
+/>                    </div>
                     <div className="form-group" style={{ width: "50%" }}>
                       <label className="form-label">Repeat new password</label>
-                      <input type="password" className="form-control" />
-                    </div>
+                      <input
+  type="password"
+  className="form-control"
+  value={repeatNewPassword}
+  onChange={handleRepeatNewPasswordChange}
+/>                    </div>
+{
+  passwordError && <div className="error-message">{passwordError}</div>
+}
+
                   </div>
                 </div>
-                <div
-                  className={`tab-pane fade ${
-                    isTabActive("notifications") ? "active show" : ""
-                  }`}
-                  id="notifications"
-                >
-                  <div className="card-body pb-2">
-                    <h6 className="mb-4">Activity</h6>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          Email me when someone comments on my article
-                        </span>
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          Email me when someone answers on my forum thread
-                        </span>
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          Email me when someone follows me
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                  <hr className="border-light m-0" />
-                  <div className="card-body pb-2">
-                    <h6 className="mb-4">Application</h6>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          News and announcements
-                        </span>
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          Weekly product updates
-                        </span>
-                      </label>
-                    </div>
-                    <div className="form-group">
-                      <label className="switcher">
-                        <input type="checkbox" className="switcher-input" />
-                        <span className="switcher-indicator">
-                          <span className="switcher-yes"></span>
-                          <span className="switcher-no"></span>
-                        </span>
-                        <span className="switcher-label">
-                          Weekly blog digest
-                        </span>
-                      </label>
-                    </div>
-                  </div>
-                </div>
+
                 <div
                   className={`tab-pane fade ${
                     isTabActive("credit-card-info") ? "active show" : ""
@@ -300,7 +409,11 @@ const AccountSettings = () => {
           </div>
         </div>
         <div className="text-right mt-3" id="bottom-buttons">
-          <button type="button" className="btn btn-primary">
+          <button
+            type="button"
+            className="btn btn-primary"
+            onClick={handleSaveChanges}
+          >
             Save changes
           </button>
           &nbsp;

@@ -15,7 +15,6 @@ const Navbar = () => {
     const users = JSON.parse(sessionStorage.getItem("tempUsers")) || [];
     const active = users.find((user) => user.isActive);
     setActiveUser(active);
-    console.log(active);
   }, []);
 
   function navSettings() {
@@ -54,7 +53,6 @@ const Navbar = () => {
       color: "#c5c2c2",
     },
   };
-  console.log(showDropdown);
 
   return (
     <div id="navbar_home">
