@@ -49,6 +49,31 @@ function PlanSelection() {
 
     const handleClick = (i) => {
         setIndex(i);
+    
+        // Retrieve existing users
+        let existingUsers = JSON.parse(sessionStorage.getItem('tempUsers')) || [];
+        
+        // Find the active user
+        const activeUserIndex = existingUsers.findIndex(user => user.isActive);
+    
+        // Update or add the plan for the active user
+        if (activeUserIndex !== -1) {
+            const updatedUser = existingUsers[activeUserIndex];
+    
+            if (!updatedUser.hasOwnProperty('plan')) {
+                updatedUser.plan = i + 1; // Setting plan number based on selected plan index
+            } else {
+                // If the 'plan' property exists, update it
+                updatedUser.plan = i + 1;
+            }
+    
+            existingUsers[activeUserIndex] = updatedUser;
+            sessionStorage.setItem('tempUsers', JSON.stringify(existingUsers)); // Save updated users
+        
+        }
+  
+        
+    
         navigate("/address");
     };
 
