@@ -44,3 +44,16 @@ a {
   transform: rotate(-180deg);
 }
 
+.parent-hover {
+  position: relative; 
+}
+
+.dropdown-menu-navbar {
+  position: absolute;
+  top: 100%; 
+  right: 0; 
+  background-color: #1a1a19; 
+  min-width: 7rem;
+  max-width: 100vw; 
+}
+
