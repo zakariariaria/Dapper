@@ -49,12 +49,23 @@ const AccountSettings = () => {
   };
   const [showAddCard, setShowAddCard] = useState(false);
 
+  const [userAddress, setUserAddress] = useState({
+    streetAddress: "",
+    city: "",
+    state: "",
+    zipCode: "",
+  });
+
+
   const [creditCard, setCreditCard] = useState({
     cardName: "",
     cardNumber: "",
     expDate: "",
     cvv: "",
   });
+
+  const [isAddressEditable, setIsAddressEditable] = useState(false);
+
   const [activeTab, setActiveTab] = useState("account-general");
   const [showToast, setShowToast] = useState(false);
   const [isNameEditable, setIsNameEditable] = useState(false);
@@ -69,6 +80,18 @@ const [passwordError, setPasswordError] = useState("");
 
 const handleRepeatNewPasswordChange = (e) => {
   setRepeatNewPassword(e.target.value);
+};
+
+const handleAddressChange = (e) => {
+  const { name, value } = e.target;
+  setUserAddress((prevState) => ({
+    ...prevState,
+    [name]: value,
+  }));
+};
+
+const toggleEditAddress = () => {
+  setIsAddressEditable(!isAddressEditable);
 };
 
 const handleDeleteCard = () => {
@@ -109,6 +132,7 @@ const handleDeleteCard = () => {
         lastName: activeUser.lastName || "",
         email: activeUser.email || "",
         password: activeUser.password || "",
+        
       });
 
       if (activeUser.creditCardInfo) {
@@ -119,6 +143,15 @@ const handleDeleteCard = () => {
           cvv: activeUser.creditCardInfo.cvv || "",
         });
       }
+      if (activeUser && activeUser.address) {
+        setUserAddress({
+          streetAddress: activeUser.address.streetAddress || "",
+          city: activeUser.address.city || "",
+          state: activeUser.address.state || "",
+          zipCode: activeUser.address.zipCode || "",
+        });
+      }
+      console.log(activeUser.address);
     }
   }, []);
 
@@ -166,6 +199,8 @@ const handleDeleteCard = () => {
           expirationDate: creditCard.expDate,
           cvv: creditCard.cvv,
         },
+
+        address: userAddress
       };
   
       // Save the updated users back to sessionStorage
@@ -250,12 +285,6 @@ const handleDeleteCard = () => {
     </div>
   );
 
-  const Button = (props) => (
-    <button className="checkout-btn" type="button">
-      {props.text}
-    </button>
-  );
-
   return (
     <div>
       <Navbar></Navbar>
@@ -295,7 +324,15 @@ const handleDeleteCard = () => {
                   }`}
                   onClick={() => handleTabClick("credit-card-info")}
                 >
-                  Credit Cards
+                  Credit Card
+                </a>
+                <a
+                  className={`list-group-item list-group-item-action ${
+                    isTabActive("account-change-address") ? "active" : ""
+                  }`}
+                  onClick={() => handleTabClick("account-change-address")}
+                >
+                  Change address
                 </a>
               </div>
             </div>
@@ -474,15 +511,20 @@ const handleDeleteCard = () => {
               
                 <div className={`tab-pane fade ${isTabActive("credit-card-info") ? "active show" : ""}`} id="credit-card-info">
         {!showAddCard ? (
-          <div>
+          <div style={{color:'white',display:'flex',flexDirection:'column'}}>
             <h5>Credit Card Information:</h5>
+            <div className="container-sm p-3 my-3 border" style={{color:'white',display:'flex',flexDirection:'column'}}>
             <p>Cardholder's Name: {creditCard.cardName}</p>
             <p>Card Number: {creditCard.cardNumber}</p>
             <p>Expiration Date: {creditCard.expDate}</p>
             <p>CVV: {creditCard.cvv}</p>
-            <button className="btn btn-danger" onClick={handleDeleteCard}>Delete Card</button>
-            <button className="btn btn-primary" onClick={() => setShowAddCard(true)}>Add New Card</button>
+            <button className="btn btn-danger" onClick={handleDeleteCard} style={{alignSelf:'flex-end'}}>Delete Card</button>            
           </div>
+          <div>
+              <button className="btn btn-primary" onClick={() => setShowAddCard(true)}>Add New Card</button>
+          </div>
+          </div>
+          
         ) : (
           <form onSubmit={handleAddCardSubmit} className="checkout-container">
             <div className="input">
@@ -530,7 +572,30 @@ const handleDeleteCard = () => {
           </form>
         )}
       </div>
-
+      <div className={`tab-pane fade ${isTabActive("account-change-address") ? "active show" : ""}`} id="account-change-address" style={{display:'flex',flexDirection:'column',color:'white'}}>
+  {!isAddressEditable ? (
+    <div>
+      <h5>Address Information:</h5>
+      <p>Street: {userAddress.streetAddress}</p>
+      <p>City: {userAddress.city}</p>
+      <p>State: {userAddress.state}</p>
+      <p>Zip Code: {userAddress.zipCode}</p>
+      <button className="btn btn-primary" onClick={toggleEditAddress} style={{alignSelf:'flex-end'}}>Edit Address</button>
+    </div>
+  ) : (
+    <div>
+      <input type="text" name="streetAddress" value={userAddress.streetAddress} onChange={handleAddressChange} />
+      <input type="text" name="city" value={userAddress.city} onChange={handleAddressChange} />
+      <input type="text" name="state" value={userAddress.state} onChange={handleAddressChange} />
+      <input type="text" name="zipCode" value={userAddress.zipCode} onChange={handleAddressChange} />
+      <button className="btn btn-success" onClick={() => {
+        toggleEditAddress();
+        handleSaveChanges(); // Save the address changes
+      }}>Save Address</button>
+      <button className="btn btn-secondary" onClick={toggleEditAddress}>Cancel</button>
+    </div>
+  )}
+</div>
 
               </div>
             </div>

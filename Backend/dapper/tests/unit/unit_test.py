@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import MagicMock
-from ..service.AccountService import AccountService
-from ..domain.User import User
+from ...service.AccountService import AccountService
+from ...domain.User import User
 
 class TestAccountService(unittest.TestCase):
     def setUp(self):
